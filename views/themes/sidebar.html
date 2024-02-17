@@ -1,0 +1,172 @@
+<!-- begin::sidebar settings -->
+<!--<div class="sidebar" id="settings">
+    <header>
+        <i class="ti-settings"></i> Settings
+    </header>
+    <div class="p-4">
+        <div class="mb-3">
+            <h6 class="text-uppercase font-size-11 mb-3 text-muted">System</h6>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between p-l-r-0 p-t-b-5">
+                    <span>Automatic updates</span>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
+                        <label class="custom-control-label" for="customSwitch1"></label>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between p-l-r-0 p-t-b-5">
+                    <span>Current statistics</span>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch2" checked>
+                        <label class="custom-control-label" for="customSwitch2"></label>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between p-l-r-0 p-t-b-5">
+                    <span>User suggestions</span>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch3" checked>
+                        <label class="custom-control-label" for="customSwitch3"></label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="mb-3">
+            <h6 class="text-uppercase font-size-11 mb-3 text-muted">Account</h6>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between p-l-r-0 p-t-b-5">
+                    <span>Senior account security</span>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch4">
+                        <label class="custom-control-label" for="customSwitch4"></label>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between p-l-r-0 p-t-b-5">
+                    <span>Account protection</span>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch5" checked>
+                        <label class="custom-control-label" for="customSwitch5"></label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="mb-3">
+            <h6 class="text-uppercase font-size-11 mb-3 text-muted">Notifications</h6>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between p-l-r-0 p-t-b-5">
+                    <span>Browser notifications</span>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch6">
+                        <label class="custom-control-label" for="customSwitch6"></label>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between p-l-r-0 p-t-b-5">
+                    <span>Mobile notifications</span>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch7">
+                        <label class="custom-control-label" for="customSwitch7"></label>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between p-l-r-0 p-t-b-5">
+                    <span>Email subscription</span>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch8">
+                        <label class="custom-control-label" for="customSwitch8"></label>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between p-l-r-0 p-t-b-5">
+                    <span>Sms notifications</span>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch9" checked>
+                        <label class="custom-control-label" for="customSwitch9"></label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>-->
+<!-- end::sidebar settings -->
+<!-- begin::navigation -->
+<div class="navigation">
+    <div class="navigation-icon-menu">
+        <ul>
+            <li class="active" data-toggle="tooltip" id="navigationDashboardsIcon">
+                <a href="#navigationDashboards" title='{{if eq .language "English"}} Dashboard{{else}}Tableau de bord{{end}}'>
+                    <i class="icon ti-pie-chart"></i>
+                </a>
+            </li>
+            <li data-toggle="tooltip" id="SystemConfigMenuIcon">
+                <a href="#SystemConfigMenu" title='{{if eq .language "English"}}System Configuration{{else}}Configuration Système{{end}}'>
+                    <i class="icon ti-settings"></i>
+                </a>
+            </li>
+            <li data-toggle="tooltip" id="ProfileManagmentMenuIcon">
+                <a href="#ProfileManagmentMenu" title='{{if eq .language "English"}}Profile Management{{else}}Gestion Profils{{end}}'>
+                    <i class="icon ti-user"></i>
+                </a>
+            </li>
+           <!--  <li data-toggle="tooltip" id="ReportingMenuIcon">
+                <a href="#ReportingMenu" title='{{if eq .language "English"}}Transaction Reports{{else}}Détails Transaction{{end}}'>
+                    <i class="icon ti-money"></i>
+                </a>
+            </li> -->
+            <li data-toggle="tooltip" id="ReportingMenuIcon">
+                {{if eq .language "English"}}
+                <a href="#ReportingMenu" title="Transaction Reports">
+                    <i class="icon fa fa-newspaper-o"></i>
+                </a>
+                {{else}}
+                <a href="#ReportingMenu" title="Détails Transaction">
+                    <i class="icon fa fa-newspaper-o"></i>
+                </a>
+                {{end}}
+            </li>
+            <li data-toggle="tooltip" id="TxnManualProcessMenuIcon">
+                {{if eq .language "English"}}
+                <a href="#TxnManualProcessMenu" title="Manual Transaction">
+                    <i class="icon fa fa-exchange"></i>
+                </a>
+                {{else}}
+                <a href="#TxnManualProcessMenu" title="Transaction manuelle">
+                    <i class="icon fa fa-exchange"></i>
+                </a>
+                {{end}}
+            </li>
+            <li data-toggle="tooltip" id="ReportsMenuIcon">
+                {{if eq .language "English"}}
+                <a href="#ReportsMenu" title="Audit Reports">
+                    <i class="icon fa fa-files-o"></i>
+                </a>
+                {{else}}
+                <a href="#ReportsMenu" title="Rapport d'Audit">
+                    <i class="icon fa fa-files-o"></i>
+                </a>
+                {{end}}
+            </li>
+            <li data-toggle="tooltip" id="AnalyticsMenuIcon">
+                {{if eq .language "English"}}
+                <a href="#AnalyticsMenu" title="Analytics">
+                    <i class="icon fa fa-bar-chart"></i>
+                </a>
+                {{else}}
+                <a href="#AnalyticsMenu" title="Statistiques">
+                    <i class="icon fa fa-bar-chart"></i>
+                </a>
+                {{end}}
+            </li>
+        </ul>
+        <!--<ul>
+            <li data-toggle="tooltip" title='{{if eq .language "English"}}View Profile{{else}}Voir le Profil{{end}}'>
+                <a href='{{urlfor "AdminViewProfile.Get"}}' class="go-to-page">
+                    <i class="icon ti-settings"></i>
+                </a>
+            </li>
+            <li data-toggle="tooltip" title='{{if eq .language "English"}}Logout{{else}}Se déconnecter{{end}}'>
+                <a href='{{urlfor "Logout.Get"}}' class="go-to-page">
+                    <i class="icon ti-power-off"></i>
+                </a>
+            </li>
+        </ul>-->
+    </div>
+    {{.Menus}}
+</div>
+<!-- end::navigation

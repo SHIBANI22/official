@@ -1,0 +1,251 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title titleColor">{{.ANALYTICS}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='/Analytics'>{{.ANALYTICS}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.ANALYTICS}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="card-title" style="font-size:16px;">
+                            <span class="icon-block bg-success icon-block-floating icon-block-sm m-r-10"><i class="fa fa-list-ol font-size-16"></i></span>
+                            {{.UserTransactionDetails}}</h6>
+                        <div>
+                            <!-- <div class="dropdown">
+    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <a href="#" class="dropdown-item">Report</a>
+        <a href="#" class="dropdown-item">Download</a>
+        <a href="#" class="dropdown-item">Close</a>
+    </div>
+</div> -->
+                        </div>
+                    </div>
+                    <div class="d-lg-none d-sm-block mb-4"></div>
+                    <div id="users-chartA"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex mb-3 justify-content-between">
+                        <div>
+                            <h6 class="card-title" style="font-size:16px;">
+                                <span class="icon-block bg-success icon-block-floating icon-block-sm m-r-10"><i class="fa fa-money font-size-16"></i></span>
+                                {{.TransactionDetails}}</h6>
+                        </div>
+                        <div>
+                            <div class="chart_filter">
+                                <div class="filter-ico" data-tooltip="true"><i class="fa fa-plus"></i></div>
+                                <div class="card">
+                                    <form id="transaction_chart_form">
+                                        <div class="filter-box">
+                                            <div class="form-row">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 10px; top: 3px; background-color: #e04b4b; border-color: #e04b4b;color: #fff;padding: 3px 7px;"><i class="fa fa-times-circle"></i></button>
+                                            </div>
+                                            <div class="form-row">
+                                                <label>{{.DateRange}}</label>
+                                                <input type="text" name="daterange" id="daterange" class="form-control simple-date-range-picker">
+                                            </div>
+                                            <br />
+                                            <div class="form-row mb-3">
+                                                <div class="col-md-12 text-center">
+                                                    <button name="btnsubmit" type="button" id="transaction_chart_search" class="btn btn-primary">{{.Apply}}</button>
+                                                    <button type="button" id="transaction_chart_reset" class="btn btn-warning">{{.Reset}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-lg-none d-sm-block mb-4"></div>
+                    <div class="transaction_chart_div"><canvas id="transaction_chart_canvas"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex mb-3 justify-content-between">
+                        <div>
+                            <h6 class="card-title" style="font-size:16px;">
+                                <span class="icon-block bg-success icon-block-floating icon-block-sm m-r-10"><i class="fa fa-university font-size-16"></i></span>
+                                {{.TransactioByOperatorDetails}}</h6>
+                        </div>
+                        <div>
+                            <div class="chart_filter">
+                                <div class="filter-ico" data-tooltip="true"><i class="fa fa-plus"></i></div>
+                                <div class="card">
+                                    <form id="transaction_by_operator_chart_form">
+                                        <div class="filter-box">
+                                            <div class="form-row">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 10px; top: 3px; background-color: #e04b4b; border-color: #e04b4b;color: #fff;padding: 3px 7px;"><i class="fa fa-times-circle"></i></button>
+                                            </div>
+                                            <div class="form-row">
+                                                <label>{{.DateRange}}</label>
+                                                <select class="form-control" name="status" id="status">
+                                                    <option value="">{{.PleaseSelect}}</option>
+                                                    <option value="ALL">{{.All}}</option>
+                                                    <option value="APPROVED">{{.Aproved}}</option>
+                                                    <option value="PENDING">{{.Pending}}</option>
+                                                    <option value="DECLINED">{{.Declained}}</option>
+                                                </select>
+                                            </div>
+                                            <br />
+                                            <div class="form-row mb-3">
+                                                <div class="col-md-12 text-center">
+                                                    <button name="btnsubmit" type="button" id="transaction_by_operator_chart_search" class="btn btn-primary">{{.Apply}}</button>
+                                                    <button type="button" id="transaction_by_operator_chart_reset" class="btn btn-warning">{{.Reset}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-lg-none d-sm-block mb-4"></div>
+                    <div class="transaction_by_operator_chart_div"><canvas id="transaction_by_operator_chart_canvas"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex mb-3 justify-content-between">
+                        <div>
+                            <h6 class="card-title" style="font-size:16px;">
+                                <span class="icon-block bg-success icon-block-floating icon-block-sm m-r-10"><i class="fa fa-google-wallet font-size-16"></i></span>
+                                {{.TransactionByChannelDetails}}</h6>
+                        </div>
+                        <div>
+                            <div class="chart_filter">
+                                <div class="filter-ico" data-tooltip="true"><i class="fa fa-plus"></i></div>
+                                <div class="card">
+                                    <form id="transaction_by_channel_chart_form">
+                                        <div class="filter-box">
+                                            <div class="form-row">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 10px; top: 3px; background-color: #e04b4b; border-color: #e04b4b;color: #fff;padding: 3px 7px;"><i class="fa fa-times-circle"></i></button>
+                                            </div>
+                                            <div class="form-row">
+                                                <label>{{.SelectStatus}}</label>
+                                                <select class="form-control" name="status" id="status">
+                                                    <option value="">{{.PleaseSelect}}</option>
+                                                    <option value="ALL">{{.All}}</option>
+                                                    <option value="APPROVED">{{.Aproved}}</option>
+                                                    <option value="PENDING">{{.Pending}}</option>
+                                                    <option value="DECLINED">{{.Declained}}</option>
+                                                </select>
+                                            </div>
+                                            <br />
+                                            <div class="form-row mb-3">
+                                                <div class="col-md-12 text-center">
+                                                    <button name="btnsubmit" type="button" id="transaction_by_channel_chart_search" class="btn btn-primary">{{.Apply}}</button>
+                                                    <button type="button" id="transaction_by_channel_chart_reset" class="btn btn-warning">{{.Reset}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-lg-none d-sm-block mb-4"></div>
+                    <div class="transaction_by_channel_chart_div"><canvas id="transaction_by_channel_chart_canvas"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-md-flex mb-3 justify-content-between">
+                        <div>
+                            <h6 class="card-title" style="font-size:16px;">
+                                <span class="icon-block bg-success icon-block-floating icon-block-sm m-r-10"><i class="fa fa-stack-exchange font-size-16"></i></span>
+                                {{.TransactionStatusDetails}}</h6>
+                        </div>
+                        <div>
+                            <div class="chart_filter">
+                                <div class="filter-ico" data-tooltip="true"><i class="fa fa-plus"></i></div>
+                                <div class="card">
+                                    <form id="transaction_status_chart_form">
+                                        <div class="filter-box">
+                                            <div class="form-row">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute; right: 10px; top: 3px; background-color: #e04b4b; border-color: #e04b4b;color: #fff;padding: 3px 7px;"><i class="fa fa-times-circle"></i></button>
+                                            </div>
+                                            <div class="form-row">
+                                                <label>{{.DateRange}}</label>
+                                                <input type="text" name="daterange" id="daterange" class="form-control simple-date-range-picker">
+                                            </div>
+                                            <br />
+                                            <div class="form-row mb-3">
+                                                <div class="col-md-12 text-center">
+                                                    <button name="btnsubmit" type="button" id="transaction_status_chart_search" class="btn btn-primary">{{.Apply}}</button>
+                                                    <button type="button" id="transaction_status_chart_reset" class="btn btn-warning">{{.Reset}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-lg-none d-sm-block mb-4"></div>
+                    <div class="transaction_status_chart_div"><canvas id="transaction_status_chart_canvas"></canvas></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+<!-- Chartjs -->
+<script src="/static/vendors/charts/apex/apexcharts.min.js"></script>
+<script src="/static/vendors/charts/chartjs/chart.min.js"></script>
+<!-- Dashboard scripts -->
+<script src="/static/assets/js/examples/dashboard.js"></script>
+<!-- Peity -->
+<script src="/static/vendors/charts/peity/jquery.peity.min.js"></script>
+<script src="/static/assets/js/examples/charts/peity.js"></script>
+<!--<script type="text/javascript">
+$(document).ready(function() {
+    var language = $("#language").val();
+    var greetMessage = "Bienvenue! Portail Supernet";
+    if (language == "English" || language == "EN") {
+        greetMessage = "Welcome! Supernet Portal";
+    }
+    setTimeout(function() { toastr.options = { timeOut: 3e3, progressBar: !0, showMethod: "slideDown", hideMethod: "slideUp", showDuration: 200, hideDuration: 200 }, toastr.success(greetMessage) }, 1e3)
+});
+</script>-->
+{{end}}

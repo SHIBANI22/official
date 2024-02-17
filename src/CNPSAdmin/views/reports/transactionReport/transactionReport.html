@@ -1,0 +1,191 @@
+{{template "themes/adminTemplate.html" .}} {{define "AdditionalStyles"}} {{end}} {{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.TxnDetals}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "TransactionReport.Get"}}'>{{.Reporting}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "TransactionReport.Get"}}'>{{.TxnDetals}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.List}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}} {{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="">
+                    <div class="accordion custom-accordion">
+                        <div class="accordion-row open">
+                            <a href="#" class="accordion-header">
+                                <h6 class="card-title">{{.SearchFilters}}</h6>
+                                <i class="accordion-status-icon close fa fa-plus"></i>
+                                <i class="accordion-status-icon open fa fa-minus"></i>
+                            </a>
+                            <div class="accordion-body">
+                                <form class="" id="search_form" action='' method="post" novalidate="" autocomplete="off">
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_merchant_id">Merchant Id</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="Merchant Id" name="input_merchant_id" id="input_merchant_id" onkeypress="return blockDisabledChar(event)" />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_merchant_name">Merchant Name</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="Merchant Name" name="input_merchant_name" id="input_merchant_name" onkeypress="return blockDisabledChar(event)" />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_invoice_number">Invoice Number</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="Invoice Number" name="input_invoice_number" id="input_invoice_number" />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_merchant_txn_number">Merchant Txn Number</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="Merchant Txn Number" name="input_merchant_txn_number" id="input_merchant_txn_number" />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_pgs_txn_number">PGS Txn Number</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="PGS Txn Number" name="input_pgs_txn_number" id="input_pgs_txn_number" onkeypress="return blockDisabledChar(event)" />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="daterange">{{.PGTxnDate}}</label>
+                                            <div class="input-group">
+                                                <input type="text" name="daterange" id="daterange" placeholder="{{.PGTxnDate}}" class="form-control simple-date-range-picker" readonly>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroupPrepend3"> <i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    <div class="form-row">
+                                        
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_bank_txn_number">Bank Txn Number</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="Bank Txn Number" name="input_bank_txn_number" id="input_bank_txn_number" onkeypress="return blockSpecialChar(event)" />
+                                        </div>
+                                       
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_bank">{{.Bank}}</label>
+                                            <select class="form-control select2" id="input_bank" name="input_bank">
+                                                <option value="" id="please_select">{{.please_select}}</option>
+                                                <option value="ECOBANK_CARD">ECOBANK_CARD</option>
+                                                <option value="SBIBANK_CARD">SBIBANK_CARD</option>
+                                                <option value="BOAMBANK_CARD">BOAMBANK_CARD</option>
+                                                <option value="NSIA_NETBANK">NSIA_NETBANK</option>
+                                                <option value="SBI_NETBANK">SBI_NETBANK</option>
+                                                <option value="BOAM_NETBANK">BOAM_NETBANK</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_channel">{{.Channel}}</label>
+                                            <select class="form-control select2" style="width: 100%;" id="input_channel" name="input_channel">
+                                                <option value="" id="please_select">{{.please_select}}</option>
+                                                <option value="CARD">CARD</option>
+                                                <option value="MOBILE MONEY">MOBILE MONEY</option>
+                                                <option value="BANKTRANSFER">BANKTRANSFER</option><!--Net Banking  -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_amount_in_pgs_base_currency">Amount In PGS Base Currency</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder={{.input_amount}} name="input_amount_in_pgs_base_currency" id="input_amount_in_pgs_base_currency" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0' />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_service_charge_inpgs_base_currency">Service Charge In PGS Base Currency</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder={{.input_amount}} name="input_service_charge_inpgs_base_currency" id="input_service_charge_inpgs_base_currency" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0' />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_payment_currency">Payment Currency</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="Payment Currency" name="input_payment_currency" id="input_payment_currency" />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_amount_in_payment_currency">Amount In Payment Currency</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder={{.input_amount}} name="input_amount_in_payment_currency" id="input_amount_in_payment_currency" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0' />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_status">{{.Status}}</label>
+                                            <select class="form-control select2" id="input_status" name="input_status">
+                                                <option value="" id="please_select">{{.please_select}}</option>
+                                                <option value="APPROVED" id="Approved">{{.Approved}}</option>
+                                                <option value="DECLINED" id="Declined">{{.Declined}}</option>
+                                                <option value="PENDING" id="Pending">{{.Pending}}</option>
+                                                <option value="INITIATED" id="Initiated">{{.Initiated}}</option>
+                                            </select>
+                                        </div>                                       
+                                    </div>
+                                    <hr />
+                                    <div class="form-row">
+                                        <div class="col-md-12 text-center">
+                                            <button name="btnsubmit" type="button" id="Search" class="btn btn-primary">{{.GetRecords}}</button>
+                                            <button name="btnreset" type="button" id="Reset" class="btn btn-warning">{{.Reset}}</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{.List}}
+                    </h6>
+                    <hr />
+                    <div class="box-body table-responsive">
+                        <table id="listTable" class="listTable table-bordered table-striped tableListname" data-document-title='{{if eq .language "English"}}Transaction Reports{{else}}Détails Transaction{{end}}' data-url='{{urlfor "TransactionReport.Post"}}' data-orderby="desc"
+                            orderby-column="3" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th id="MerchantId">Merchant Id</th>
+                                    <th id="InvoiceNumber">Merchant Name</th>
+                                    <th id="InvoiceNumber">Invoice Number</th>
+                                    <th id="MerchantTxnNumber">Merchant Txn Number</th>
+                                    <th id="CNPSTxnDate">{{.CNPSTxnDate}}</th>
+                                    <th id="PGSTxnNumber">PGS Txn Number</th>
+                                    <th id="PGTxnDate">{{.PGTxnDate}}</th>
+                                    <th id="BankTxnNumber">Bank Txn Number</th>
+                                    <th id="BankTxnDate">{{.BankTxnDate}}</th>
+                                    <th id="Bank">{{.Bank}}</th>
+                                    <th id="Channel">{{.Channel}}</th>
+                                    <th id="AmountInPGSBaseCurrency">Amount In PGS Base Currency</th>
+                                    <th id="ServiceChargeInPGSBaseCurrency">Service Charge In PGS Base Currency</th>
+                                    <th id="PaymentCurrency">Payment Currency</th>
+                                    <th id="AmountInPaymentCurrency">Amount In Payment Currency</th>
+                                    <th id="ServiceChargeInPaymentCurrency">Service Charge In Payment Currency</th>
+                                    <th id="ConversionRate">Conversion Rate</th>
+                                    <th id="Status1">{{.Status}}</th>
+                               
+                            </tr>
+                               
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}} {{define "AdditionalScripts"}} {{template "default/menuPrivilege.html" .}} {{end}}

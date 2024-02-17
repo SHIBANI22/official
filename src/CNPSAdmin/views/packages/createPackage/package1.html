@@ -1,0 +1,64 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.Users}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchUser.Get"}}'>{{.ProfileManagement}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchUser.Get"}}'>{{.Users}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.AddUser}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">{{.AddUser}}
+                <a id="CreateUserMenu" class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "SearchUser.Get"}}'> {{.Back}}</a></h6>
+            <hr />
+            <form id="packageForm" action="{{urlfor "PackageController.PostAction"}}" method="post" autocomplete="off"
+            onsubmit="return validateForm()">
+            <div class="form-row">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" placeholder="Enter Package Name" name="name" id="name"
+                    maxlength="255">
+                <span id="nameError" style="color: red;"></span>
+            </div>
+            <div class="form-row">
+                <label for="volume">Volume</label>
+                <input type="text" class="form-control" placeholder="Enter Volume" name="volume" id="volume"
+                    maxlength="16">
+                <span id="volumeError" style="color: red;"></span>
+            </div>
+            <div class="form-row">
+                <label for="txnfees">Transaction Fees</label>
+                <input type="text" class="form-control" placeholder="Enter Transaction Fees" name="txnfees"
+                    id="txnfees" maxlength="255">
+                <span id="txnfeesError" style="color: red;"></span>
+            </div>
+            <button class="btn btn-primary btn-block" id="createPackageButton">Create Package</button>
+        </form>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

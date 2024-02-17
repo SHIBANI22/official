@@ -1,0 +1,182 @@
+{{template "themes/adminTemplate.html" .}} {{define "AdditionalStyles"}} {{end}} {{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.MerchantApproval}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchMerchant.Get"}}'>{{.Merchant}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "MerchantApproval.Get"}}'>{{.MerchantApproval}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.Update}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}} {{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title"> MerchantID - {{.merchantId}}
+                <a id="backButton" class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "SearchMerchant.Get"}}'> {{.Back}}</a></h6>
+            <hr />
+            <form class="needs-validation" id="UpdateMerchant" action='{{urlfor "UpdateMerchant.Post" ":MerchantID" .merchantId}}' method="post" novalidate="" autocomplete="off">
+                <br>
+                <br>
+                <span  class="card-title"> <strong>{{.ContactInfo}}</strong></span>
+                <hr>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_name">{{.FullName}}</label>
+                        <input type="text" class="form-control" value="{{.name}}" name="input_name" id="input_name" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_email">{{.Email}}</label>
+                        <input type="text" class="form-control" value="{{.emailId}}" name="input_email" id="input_email" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_mobile">{{.Mobile}}</label>
+                        <input type="text" class="form-control" value="{{.mobileNum}}" name="input_mobile" id="input_mobile" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_country">{{.Countrys}}</label>
+                        <input type="text" class="form-control" value="{{.country}}" name="input_country" id="input_country" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-8 mb-8">
+                        <label for="input_address">{{.Address}}</label>
+                        <input type="text" class="form-control" value="{{.address}}" name="input_address" id="input_address" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <span  class="card-title"> <strong>{{.BusinessDtls}}</strong></span>
+                <hr />
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_business_name">{{.BusinessName}}</label>
+                        <input type="text" class="form-control" value="{{.business_name}}" name="input_business_name" id="input_business_name" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_business_type">{{.BusinessType}}</label>
+                        <input type="text" class="form-control" value="{{.bussiness_type}}" name="input_business_type" id="input_business_type" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label for="logo">{{.Logo}}</label>
+                                <input type="hidden" class="form-control" id="logo" name="logo" readonly  aria-required="false" disabled>
+                                <img src="data:image/png;base64,{{.logo}}" alt="logo not uploaded" style="max-width: 100%; height: auto;">
+                                <div class="valid-feedback"> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <br>
+                <br>
+                <span  class="card-title"> <strong>{{.AccountDetails}}</strong></span>
+                <hr />
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_pan">{{.PAN}}</label>
+                        <input type="text" class="form-control" value="{{.pan}}" name="input_pan" id="input_pan" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_account_num">{{.AccountName}}</label>
+                        <input type="text" class="form-control" value="{{.account_num}}" name="input_account_num" id="input_account_num" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_IFSC_code">{{.IFSCCode}}</label>
+                        <input type="text" class="form-control" value="{{.account_ifsc_code}}" name="input_IFSC_code" id="input_IFSC_code" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_bank_ame">{{.BankName}}</label>
+                        <input type="text" class="form-control" value="{{.bank_name}}" name="input_bank_ame" id="input_bank_ame" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="settlementcurrency">{{.SettlementCurrency}}</label>
+                        <select class="form-control select2" style="width: 100%;" id="settlementcurrency" name="settlementcurrency" required>
+                            <option value="">{{.please_select}}</option>
+                            {{$c:=.settlement_currency}} 
+                            {{range $val := .CountryNames}}
+                            {{$country:="0"}}
+                            {{$symbol:="0"}}
+                            {{range $innerval := $val}}
+                            {{if eq $symbol "0"}}
+                            {{$symbol = $innerval}}
+                            {{else if eq $country "0"}}
+                            {{$country = $innerval}}
+                            {{end}}
+                                {{ end }}
+                                <option value="{{$symbol}}" {{if eq $c $symbol}} selected{{end}}>{{$country}} ( {{$symbol}} )</option>
+                            {{ end }}
+                        </select>
+                    </div>                   
+                </div>
+                <br>
+                <br>
+                             <span  class="card-title"> <strong>{{.DOC}}</strong></span>
+                <hr />
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_id_proof">{{.Id_Proof}}</label>
+                        <input type="hidden" class="form-control" name="input_id_proof" id="input_id_proof" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <img id="idProofImage" src="data:image/png;base64,{{.id_proof_doc}}" alt="id proof not uploaded" style="max-width: 100%; height: auto;">
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_address_proof">{{.Address_Proof}}</label>
+                        <input type="hidden" class="form-control" name="input_address_proof" id="input_address_proof" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <img src="data:image/png;base64,{{.address_proof_doc}}" alt="address Proof not uploaded" style="max-width: 100%; height: auto;">
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_status">{{.Status}}</label>
+                        <select class="form-control select2" style="width: 100%;" id="input_status" name="input_status" required>
+                            <option value="" {{if eq .status ""}} selected{{end}}>{{.please_select}}</option>
+                            <option value="PENDING" {{if eq .status "PENDING"}} selected{{end}}>PENDING</option>
+                            <option value="ACTIVE" {{if eq .status "ACTIVE"}} selected{{end}}>ACTIVE</option>
+                            <option value="INACTIVE" {{if eq .status "INACTIVE"}} selected{{end}}>INACTIVE</option>
+                            <!-- <option value="APPROVED">APPROVED</option> -->
+                            <option value="TEMP_BLOCK" {{if eq .status "TEMP_BLOCK"}} selected{{end}}>TEMP_BLOCK</option>
+                        </select>
+                    </div>
+                </div>            
+                <hr />
+                <div class="form-row">
+                    <div class="col-md-12 text-center">
+                        <input name="btnsubmit" id="submitBtn" type="submit" class="btn btn-primary" value="{{.Submit}}"> 
+                        <!-- <a href='{{urlfor "SearchMerchant.Post"}}' name="btnsubmit" type="submit" class="btn btn-primary" id="submitBtn" value="{{.Submit}}">{{.Submit}}</a> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+ {{define "AdditionalScripts"}} 
+ {{template "default/menuPrivilege.html" .}} 
+ {{end}}

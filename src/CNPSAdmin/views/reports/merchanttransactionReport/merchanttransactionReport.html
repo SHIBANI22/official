@@ -1,0 +1,319 @@
+{{template "default/commonCssAndJsMerchant.html".}}
+{{define "content"}}
+	<div class="wrapper">
+		<div class="content-wrapper">
+			<section class="content-header">
+				<h1 id="EntityTxnrep">{{.EntityTxnrep}}</h1>
+				<ol class="breadcrumb">
+					<li id="dashboard"  class="breadcrumb-item"><a href="/Dashboard"><i
+							class="fa fa-dashboard"></i> {{.Dashboard}}</a></li>
+             <li class="active"><a href="/Report/MerchantTransactionReport" >{{.EntityTxnrep}} </a></li>
+				</ol>
+			</section>
+
+
+			<!-- Main content -->
+			<form action="/Report/MerchantTransactionReport" method="post">
+				<section class="content">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="box box-orange effect1 boxbackground1">
+								<div class="box-header with-border boxbackground2">
+									<h3 class="box-title">{{.SearchFilters}}</h3>
+									<div class="box-tools pull-right">
+										<button type="button" class="btn btn-box-tool"
+											data-widget="collapse">
+											<i class="fa fa-minus"></i>
+										</button>
+									</div>
+								</div>
+								<div class="box-body">
+								<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label id="CNPSTransactionNumber">{{.CNPSTransactionNumber}}</label> <input maxlength="50" type="text"
+													class="form-control" placeholder={{.input_cnpstxnnumnber}}
+													name="input_cnpstxnnumnber" id="input_cnpstxnnumnber" />
+											</div>
+										</div>
+                    
+                    <div class="col-md-4">
+											<div class="form-group">
+												<label id="PGTransactionNumber">{{.PGTransactionNumber}}</label> <input maxlength="50" type="text"
+													class="form-control" placeholder={{.input_pgtxnnumnber}}
+													name="input_pgtxnnumnber" id="input_pgtxnnumnber" />
+											</div>
+										</div>
+                    
+                    <div class="col-md-4">
+											<div class="form-group">
+												<label id="Amount">{{.Amount}}</label> <input maxlength="50" type="text"
+													class="form-control" placeholder={{.input_amount}}
+													name="input_amount" id="input_amount"/>
+											</div>
+										</div>
+        
+                    </div>
+                    <div class="row">
+                     
+  
+                    
+                    <!--<div class="col-md-4">
+											<div class="form-group">
+												<label id="BANKTransactionNumber">{{.BANKTransactionNumber}}</label> <input maxlength="50" type="text"
+													class="form-control" placeholder="Enter Bank Txn ID"
+													name="BANKTransactionNumber" id="BANKTransactionNumber" />
+											</div>
+										</div>-->
+                    <div class="col-md-4">
+											<div class="form-group">
+												<label id="Bank">{{.Bank}}</label><select
+													class="form-control" style="width: 100%;" id="input_bank"
+													name="input_bank">
+													<option value="" id="please_select">{{.please_select}}</option>
+													<option value="ECOBANK">ECOBANK</option>
+													<option value="UBABANK">UBABANK</option>
+													<option value="MTN">MTN</option>
+												</select>
+											</div>
+										</div>
+                  <!--  <div class="col-md-4">
+											<div class="form-group">
+												<label id="Bank">Bank/Operator</label> <input maxlength="50" type="text"
+													class="form-control" placeholder="Enter Bank Name"
+													name="Bank" id="Bank" />
+											</div>
+										</div>-->
+                    <div class="col-md-4">
+											<div class="form-group">
+												<label id="Channel">{{.Channel}}</label><select
+													class="form-control" style="width: 100%;" id="input_channel"
+													name="input_channel">
+													<option value="" id="please_select">{{.please_select}}</option>
+													<option value="CARD">CARD</option>
+													<option value="BILLMAP">BILLMAP</option>
+													<option value="DIRECTDEBIT">DIRECTDEBIT</option>
+													<option value="QRCODE">QRCODE</option>
+												</select>
+											</div>
+										</div>
+                    
+                    
+                    <div class="col-md-4">
+											<div class="form-group">
+												 <label id="PGTxnDate">{{.PGTxnDate}}</label>
+												<div class="input-group">
+													<div class="input-group-addon">
+														<i class="fa fa-calendar"></i>
+													</div>
+													<input type="text" class="form-control pull-right"
+														id="daterange-btn" name="daterange" readonly="readonly">
+												</div>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label id="Status">{{.Status}}</label><select
+													class="form-control" style="width: 100%;" id="input_status"
+													name="input_status">
+													<option value="">{{.please_select}}</option>
+													<option value="APPROVED">{{.Approved}}</option>
+													<option value="DECLINED">{{.Declined}}</option>
+												</select>
+											</div>
+										</div>
+									</div>
+               <!-- /.box-body -->
+                <div class="form-group">
+									<div class="col-sm-12 text-center">
+										<button name="btnsubmit" id="btnsubmit" class="btn btn-danger">{{.Search}}</button>
+										<a href="/Report/MerchantTransactionReport"><button type="button"
+												class="btn btn-danger" id="filterDataReset">{{.Reset}}</button></a>
+									</div>
+              	<!-- /.box -->
+								</div>
+							</div>
+						</div>
+					</div>
+           </div>
+					<!-- /.row -->
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="box box-default">
+								<div class="box-header with-border">
+									<h3  class="box-title">{{.ListOfTransactionReports}}</h3>
+								</div>
+
+								<div class="box-body table-responsive">
+									<table id=""
+										class="table table-bordered table-striped datatables"
+										style="width: 100%;">
+										<thead style="background-color: #e3dcd1">
+											<tr>
+                     <!-- <th id="CNPSTransactionNumber">Supernet Txn ID</th>
+											<th id="TimeStamp">Supernet Txn Date</th>
+                      <th id="PGTransactionNumber">PG Txn Number</th>
+                      <th id="PGTransactionDate">PG Txn Date</th>
+                      <th id="BANKTransactionNumber">Bank Txn Id</th>
+                      <th id="BankTransactionDate">Bank Txn Date</th>
+                      <th id="Bank">Bank/Operator</th>
+                      <th id="Channel">Channel Name</th>
+                      <th id="Amount">Amount</th>
+                      <th id="Status1">Status</th>-->
+                       <th id="CNPSTransactionNumber">{{.CNPSTransactionNumber}}</th>
+					  <th id="CNPSTxnDate">{{.CNPSTxnDate}}</th>
+                      <th id="PGTransactionNumber">{{.PGTransactionNumber}}</th>
+                      <th id="PGTxnDate">{{.PGTxnDate}}</th>
+                      <th id="BANKTransactionNumber">{{.BANKTransactionNumber}}</th>
+                      <th id="BankTxnDate">{{.BankTxnDate}}</th>
+                      <th id="Bank">{{.Bank}}</th>
+                      <th id="Channel">{{.Channel}}</th>
+                      <th id="Amount">{{.Amount}}</th>
+                      <th id="Status1">{{.Status}}</th>
+                      </tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</form>
+		</div>
+		<!-- /.content-wrapper -->
+		<div id="footer"></div>
+
+		<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+		<div class="control-sidebar-bg"></div>
+	</div>
+<script src="../../static/resources/js/jquery.min.js"></script>
+  
+  
+	<script type="text/javascript">
+   
+  
+</script>
+<script> 
+$(function(){
+    $("#footer").load("../../static/commonfiles/footer.html"); 
+});
+
+$(document).ready(function(){
+   
+    var data = {{.CustomerData}};
+
+  var lng = {{.language}}
+		var espanol = {"sProcessing": "Procesando...",
+		          "sLengthMenu": "Affichage _MENU_ Lignes par page",
+		          "sZeroRecords": "Pas d’information  disponible!",
+		          "sInfo": "Affichage de la ligne _START_ à _END_ sur _TOTAL_ Lignes",
+		          "sInfoEmpty": "Aucun enregistrement disponible",
+		          "sInfoFiltered": "(filtrado de un total de _MAX_ líneas)",
+		          "sInfoPostFix": "",
+		          "sSearch": "Buscar:",
+              "oPaginate": {
+              "sNext": "Suivant",
+              "sPrevious":"Précedent"
+              },
+		          "sUrl": ""
+		         };
+
+		var english = {"sLengthMenu": "Display _MENU_ records per page",
+		       "sZeroRecords": "Click on search button to get records!",
+		       "sInfo": "Showing page _PAGE_ of _PAGES_",
+		       "sInfoEmpty": "No records available",
+           "oPaginate": {
+              "sNext": "Next",
+              "sPrevious":"Previous"
+            },
+		       "sInfoFiltered": "(filtered from _MAX_ total records)"
+		   };
+		var currentLang = (lng == "French") ? espanol : english;
+    var table = $('.datatables').DataTable({"oLanguage": currentLang,
+    // Column definitions
+    columns : [
+    {data : 'CNPSTransactionNumber'},
+    {data : 'CNPSTxnDate'},
+    {data : 'PGTransactionNumber'},
+    {data : 'TimeStamp'},
+    {data : 'BankTransactionNumber'},
+    {data : 'BankTransactionDate'},
+    {data : 'BankName'},
+    {data : 'ChannelName'},
+    {data : 'Amount'},
+    {data : 'Status'}
+    
+],
+   data : data,
+   pageLength: 10,
+    searching:true,
+    "order":[[1,"desc"]],
+    "columnDefs":[{
+    "targets":[8],
+    className: "text-right transactionAmount"
+    },{
+    "targets":[6],
+    className: "text-right transactionCommission"
+    }],
+    dom: 'Bfrtlip',
+    "iDisplayLength": 100,
+    buttons: [
+    {
+      extend: 'copy',
+      text: '<i class="fa fa-copy"></i>'
+    }
+    , 
+    {
+    extend: 'excelHtml5',
+
+    filename: 'TransactionReport',
+    text: '<i class="fa fa-file-excel-o"></i>'
+    }, {
+    extend: 'pdfHtml5',
+    text: '<i class="fa fa-file-pdf-o"></i>',
+    footer: true,
+    orientation: 'landscape',
+    pageSize: 'LEGAL',
+    filename: 'TransactionReport',
+    message: "TransactionReports",
+    header: true,
+    customize: function ( doc ) {
+    var cols = [];
+    cols[0] = {text: '© 2019 | Supernet ', alignment: 'left', margin:[45] };
+    cols[1] = {text: '- Supernet Technologies -', alignment: 'center'};
+    cols[2] = {text: 'Version 1.0', alignment: 'right', margin:[0,0,45] };
+    var objFooter = {};
+    objFooter['columns'] = cols;
+    doc['footer']=objFooter;
+    var cols = [];
+    cols[0] = {text: 'Transaction Reports', alignment: 'center', fontSize:[20] };
+    var objHeader = {};
+    objHeader['columns'] = cols;
+    doc['header']=objHeader;
+    }
+    }
+    ]
+    });
+
+    $('.datatables tbody').on('click', 'td.details-control', function () {
+    var tr  = $(this).closest('tr'),
+    row = table.row(tr);
+    if (row.child.isShown()) {
+    tr.next('tr').removeClass('details-row');
+    row.child.hide();
+    tr.removeClass('shown');
+    }
+    else {
+    row.child(format(row.data())).show();
+    tr.next('tr').addClass('details-row');
+    tr.addClass('shown');
+    }
+    });
+
+    });
+
+</script> 
+ {{end}}

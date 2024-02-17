@@ -1,0 +1,64 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.Currency}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchCurrency.Get"}}'>{{.SysConfig}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchCurrency.Get"}}'>{{.Currency}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Change Currency Conversion Method</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">Update Currency Conversion Method
+                <a id="ChangeCurrencyConversionMethodMenu" class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "SearchCurrency.Get"}}'> {{.Back}}</a></h6>
+            <hr />
+            <form class="needs-validation" id="currencyForm" action='{{urlfor "ChangeCurrencyConversionMethod.Post"}}' method="post" novalidate="" autocomplete="off">
+                
+                <div class="form-row">
+                    
+                    <div class="col-md-4 mb-3">
+                        <label for="input_status">Currency Conversion Method</label>
+                        <select class="form-control select2" style="width: 100%;" id="input_currency_conversion_method" name="input_currency_conversion_method" required>
+                            <option value="" {{if eq .CurrencyConversionMethod ""}} selected{{end}}>{{.please_select}}</option>
+                            <option value="FIXED" {{if eq .CurrencyConversionMethod "FIXED"}} selected{{end}}>FIXED</option>
+                            <option value="XE" {{if eq .CurrencyConversionMethod "XE"}} selected{{end}}>XE</option>
+                        </select>
+                    </div>
+                </div>
+                                              
+                <hr />
+                <div class="form-row">
+                    <div class="col-md-12 text-center">
+                        <button name="btnsubmit" id="submitBtn" type="submit" class="btn btn-primary">{{.Submit}}</button>
+                        <a href='{{urlfor "SearchCurrency.Get"}}' type="button" class="btn btn-warning" id="cancel">{{.Cancel}}</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

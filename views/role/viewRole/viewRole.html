@@ -1,0 +1,66 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.Roles}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchRole.Get"}}'>{{.ProfileMgmt}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchRole.Get"}}'>{{.Roles}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.View}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}} 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{.View}}
+                        <div class="pull-right">
+                            <a id="updateRoleMenu" class="btn btn-danger dangerbtn-height" href='{{urlfor "UpdateRole.Get" ":AdminID" .Id}}'> <i class="fa fa-edit"> </i>{{.Updaterole}}</a>
+                           <a id="backButton" class="btn btn-danger dangerbtn-height" href='{{urlfor "SearchRole.Get" ":AdminID" .Id}}'> {{.Back}}</a>
+                        </div>
+                    </h6>
+                    <hr />
+                    <form class="" action='{{urlfor "CreateRole.Post"}}' method="post" novalidate="">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="role_name">{{.RoleName}}</label>
+                                <input type="text" class="form-control" id="role_name" name="role_name" value="{{.DepartmentName}}" readonly oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="create_date">{{.CreateDate}}</label>
+                                <input type="text" class="form-control" name="create_date" id="create_date" value="{{.DepartmentCreatedate}}" readonly />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="update_date">{{.UpdateDate}}</label>
+                                <input type="text" class="form-control" name="update_date" id="update_date" value="{{.DepartmentUpdatedate}}" readonly />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

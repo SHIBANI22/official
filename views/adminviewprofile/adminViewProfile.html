@@ -1,0 +1,173 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.AdminViewProfile}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.AdminViewProfile}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if .flash.error}}
+    {{else if .flash.success}}
+    {{else}}
+    <div class="row row-sm">
+        <div class="col-md-12 profile-success pull-right">
+            <h4 class="profileTitleAdmin" data-backround-image="/static/assets/media/image/profile-bg.png">
+                {{if eq .language "English"}}Welcome! {{else}}Bienvenue! {{end}} {{.UserFirstName}}</h4>
+        </div>
+    </div>
+    {{end}}
+    {{if .flash.error}}
+    <div class="alert alert-danger alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.flash.error}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    {{if .flash.success}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.flash.success}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <!--  <div class="card-body overflow-hidden viewprofile-card" data-backround-image="/static/assets/media/image/profile-bg.png">
+        <div class="p-3 d-lg-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <div onmouseover="mouseOverDelete();" onmouseout="mouseOverDeleteBtnRemove();">
+                    <figure class="avatar avatar-xl mr-3">
+                        <img src='' class="rounded-circle" alt="...">
+                    </figure>
+                    
+                    <a href="/photo/remove" id="deletePic" class="btn btn-outline-danger btn-lg btn-floating btn-pulse">
+                        <i class="ti-trash" title='Delete Profile Picture'></i> </a>
+                    
+                </div>
+                <div class="text-white">
+                    <h3 class="profileTitleAdmin"> {{if eq .language "English"}}Welcome {{else}}Bienvenue {{end}} {{.UserFirstName}}
+                    </h3>
+                    <p class="mb-0 opacity-8 profileTitleRole">{{.UserRole}}</p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <form id="adminViewProf" class="needs-validation" action='{{urlfor "AdminViewProfile.Post"}}' method="post" enctype="multipart/form-data" autocomplete="off">
+        <div class="row row-sm">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body userInfoTab">
+                        <h5 class="card-title list-group-item"> {{.UserInformation}}
+                            <button type="button" id="ProfileEditBtn" class="btn btn-outline-danger btn-lg btn-floating btn-pulse editProfileBtn pull-right" data-toggle="tooltip" data-placement="top" data-original-title="{{.ProfileUpdateTooltipLabel}}">
+                                <i class="ti-pencil m-r-3"></i> </button>
+                        </h5>
+                        <div class="row">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <label class="col-2" id="FirstName">{{.FirstName}}</label>
+                                    <div class="col-1"> : </div>
+                                    <div class="col-3  text-muted">{{.UserFirstName}}</div>
+                                    <label class="col-2" id="MiddleName">{{.MiddleName}}</label>
+                                    <div class="col-1"> : </div>
+                                    <div class="col-3 text-muted">{{.UserMiddleName}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-2" id="LastName">{{.LastName}}</label>
+                                    <div class="col-1"> : </div>
+                                    <div class="col-3 text-muted">{{.UserLastName}}</div>
+                                    <label class="col-2" id="Mobile">{{.Mobile}}</label>
+                                    <div class="col-1"> : </div>
+                                    <div class="col-3 text-muted">{{.UserMobile}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-2" id="Email">{{.Email}}</label>
+                                    <div class="col-1"> : </div>
+                                    <div class="col-3 text-muted">{{.UserEmail}}</div>
+                                    <label class="col-2" id="Role">{{.Role}}</label>
+                                    <div class="col-1"> : </div>
+                                    <div class="col-3 text-muted">{{.UserRole}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-2" id="ContactNumber">{{.ContactNumber}}</label>
+                                    <div class="col-1"> : </div>
+                                    <div class="col-3 text-muted">{{.UserContactNumber}}</div>
+                                    <label class="col-2" id="DepartmentName">{{.DepartmentName}}</label>
+                                    <div class="col-1"> : </div>
+                                    <div class="col-3 text-muted">{{.UserDepartment}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-2" id="EmployeeId">{{.EmployeeId}}</label>
+                                    <div class="col-1"> : </div>
+                                    <div class="col-3 text-muted">{{.UserEmployeeID}}</div>
+                                    <label class="col-2" id="Status">{{.Status}}</label>
+                                    <div class="col-1"> : </div>
+                                    <div class="col-3 text-muted">{{.UserStatus}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-2" id="Language">{{.Language}}</label>
+                                    <div class="col-1"> : </div>
+                                    <div class="col-3 text-muted">{{.UserLanguage}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body updateprofileTab">
+                        <h5 class="card-title list-group-item"> {{.ProfileTitleLabel}}
+                            <button type="button" id="ProfileEditBtn" class="btn btn-outline-danger btn-lg btn-floating btn-pulse backProfileBtn pull-right" data-toggle="tooltip" data-placement="top" data-original-title="{{.BackTooltipLabel}}">
+                                <i class="ti-angle-left"></i> </button>
+                        </h5>
+                        <div class="form-row">
+                            <!--<div class="col-md-4 mb-3">
+                                <label for="input_user_middele_name">{{.ProfileChooseLabel}}</label>
+                                <div class="custom-file">
+                                    <input type="file" name="profile_photo" class="custom-file-input joint" id="Photo" accept=".jpg,.jpeg,.png,.gif" data-max-size="2048">
+                                    <label class="custom-file-label custom-file-label-{{.language}}" for="validatedCustomFile">{{.ChoosePlaceholderLabel}}</label>
+                                </div>
+                                 <span class="filename"></span>
+                                <div class="valid-feedback"> </div>
+                            </div>-->
+                            <!-- <div class="col-md-4 mb-3"></div> -->
+                            <div class="col-md-4 mb-3">
+                                <label for="input_user_first_name">{{.Language}}</label>
+                                <select class="form-control select2" id="input_user_language" name="input_user_language" value="{{.UserLanguage}}" required>
+                                    <option value="">{{.pleaseselect}}</option>
+                                    <option value="English" {{if eq .language "English"}} selected{{end}}>English</option>
+                                    <option value="French" {{if eq .language "French"}} selected{{end}}>French</option>
+                                </select>
+                                <div class="valid-feedback"> </div>
+                            </div>
+                        </div>
+                        <div class="form-row" id="image">
+                            <div class="col-md-6 mb-3">
+                                <img id="joint-img" alt="Photo" class="form-control" style="border: 1px solid gray; margin-top: 10px; width: 71px; height: 73px; padding: 0.2rem 0.10rem;">
+                                <button type="button" id="removePic" class="btn btn-outline-danger">
+                                    <i class="ti-close"></i> </button>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="col-md-12 text-center">
+                            <button type="submit" id="submitBtn" class="btn btn-primary"> <i class="fa fa-edit"></i> {{.updateUser}} </button>
+                            <a href='{{urlfor "Dashboard.Get"}}'><button type="button" name="back" value="back" class="btn btn-warning"> {{.cancel}} </button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

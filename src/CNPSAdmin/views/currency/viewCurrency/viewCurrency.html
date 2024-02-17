@@ -1,0 +1,64 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.Currency}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchCurrency.Get"}}'>{{.SysConfig}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchCurrency.Get"}}'>{{.Currency}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.View}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}} 
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">{{.View}}
+                <div class="pull-right">
+                    <a id="UpdateUserMenu" class="btn btn-danger dangerbtn-height" href='{{urlfor "UpdateCurrency.Get" ":currency" .Code}}'><i class="fa fa-edit"></i> {{.Updateuser}}</a>
+                    <a id="backButton" class="btn btn-danger dangerbtn-height" href='{{urlfor "SearchCurrency.Get"}}'> {{.Back}}</a>
+                </div>
+            </h6>
+            <hr />
+            <!-- <form class="needs-validation" id="createUser" action='{{urlfor "CreateCurrency.Post"}}' method="post" novalidate=""> -->
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_code">{{.Codes}}</label>
+                        <input type="text" class="form-control" name="input_code" id="input_code" value="{{.Code}}" readonly/>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_symbole">{{.Symbols}}</label> <input type="text" class="form-control" name="input_symbol" id="input_symbol" value="{{.Symbol}}" readonly />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label id="input_country">{{.Countrys}}</label> <input type="text" class="form-control" name="input_country" id="input_country" value="{{.Country}}" readonly onkeypress="return blockSpecialCharwithNumber(event)" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_status">{{.Statuss}}</label> <input type="text" class="form-control" name="input_status" id="input_status" value="{{.Status}}" readonly />
+                    </div>
+                                            
+                </div>
+            <!-- </form> -->
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

@@ -1,0 +1,367 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+<link rel="stylesheet" type="text/css" href="/static/vendors/treegrid/css/jquery.treegrid.css">
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.PrivilegesNew}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchPrivilege.Get"}}'>{{.ProfileMgmt}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchPrivilege.Get"}}'>{{.PrivilegesNew}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.Update}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title"> {{.Update}}
+                <div class="pull-right">
+                    <a id="backButton" class="btn btn-danger dangerbtn-height" href='{{urlfor "ViewPrivilege.Get" ":AdminID" .Id}}'> {{.Back}}</a>
+                </div>
+            </h6>
+            <hr />
+            <form class="needs-validation" id="updatePrivilege" action='{{urlfor "UpdatePrivilege.Post" ":AdminID" .Id}}' method="post" novalidate="" autocomplete="off">
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label id="departmentName">{{.EnterRoleName}}</label> <input type="text" class="form-control" name="input_role_name" placeholder={{.EnterRoleName}} id="input_role_name" value="{{.DepartmentName}}" readonly>
+                            <input type="text" class="form-control" name="Json" id="Json" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <table class="table table-bordered tree-basic previlege-table">
+                                <thead>
+                                    <tr>
+                                        <th>{{.MenuLabel}}</th>
+                                        <th>{{.SelectAll}}</th>
+                                        <th>{{.AddLabel}}</th>
+                                        <th>{{.UpdateLabel}}</th>
+                                        <th>{{.ViewLabel}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="treegrid-1">
+                                        <td class="align-left">{{.Dashboard}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success">
+                                                <input type="checkbox" class="custom-control-input" title="{{.Dashboard}}" identity="Dashboard" name="menus" id="Dashboard_Menus" checked="checked" disabled="disabled">
+                                                <label class="custom-control-label" for="customCheck2" data-toggle="tooltip" data-placement="top" data-original-title="{{.Dashboard}}"></label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="treegrid-4">
+                                        <td class="align-left">{{.SystemConfiguration}}<input type="checkbox" identity="SystemConfiguration" title="{{.SystemConfiguration}}" style="display: none;" name="menus" id="System_Configuration" value="false">
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="treegrid-5 treegrid-parent-4">
+                                        <td class="align-left">{{.ViewSwitchStatus}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input id="pgw" type="checkbox" class="custom-control-input styled select-all pgw">
+                                                <label class="custom-control-label" for="pgw" data-toggle="tooltip" data-placement="top" data-original-title="{{.SelectAll}}"></label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="custom-control-input Sysconfig_option Sysconfig_sw_view_dependent switch-input" title="{{.UpdateSwitchStatus}}" identity="UpdateSwitchStatus" name="menus" id="Update_Switch_Status" value="false">
+                                                <label class="custom-control-label" for="Update_Switch_Status" data-toggle="tooltip" data-placement="top" data-original-title="{{.UpdateLabel}}"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="custom-control-input Sysconfig_option Sysconfig_sw_view switch-input" title="{{.ViewSwitchStatus}}" identity="ViewSwitchStatus" name="menus" id="View_Switch_Status" value="false">
+                                                <label class="custom-control-label" for="View_Switch_Status" data-toggle="tooltip" data-placement="top" data-original-title="{{.ViewLabel}}"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="treegrid-8 treegrid-parent-4">
+                                        <td class="align-left">{{.ViewChannels}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input id="channel" type="checkbox" class="custom-control-input styled select-all channel">
+                                                <label class="custom-control-label" for="channel" data-toggle="tooltip" data-placement="top" data-original-title="{{.SelectAll}}"></label>
+                                                <input type="checkbox" title="{{.ViewChannels}}" style="display: none;" name="menus" id="PaymentChannel" value="false"></label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="custom-control-input Sysconfig_option Sysconfig_chn_view_dependent channel-input" title="{{.UpdateChannels}}" identity="UpdateChannels" name="menus" id="Update_Channels" value="false">
+                                                <label class="custom-control-label" for="Update_Channels" data-toggle="tooltip" data-placement="top" data-original-title="{{.UpdateLabel}}"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="custom-control-input Sysconfig_option Sysconfig_chn_view channel-input" title="{{.ViewChannels}}" identity="ViewChannels" name="menus" id="View_Channels" value="false">
+                                                <label class="custom-control-label" for="View_Channels" data-toggle="tooltip" data-placement="top" data-original-title="{{.ViewLabel}}"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="treegrid-2">
+                                        <td class="align-left">{{.ProfileManagment}}
+                                            <input type="checkbox" identity="ProfileManagment" title="{{.ProfileManagment}}" style="display: none;" name="menus" id="Profile_Managment" value="false"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="treegrid-6 treegrid-parent-2">
+                                        <td class="align-left">{{.Viewrole}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input id="role" type="checkbox" class="custom-control-input styled select-all role">
+                                                <label class="custom-control-label" for="role" data-toggle="tooltip" data-placement="top" data-original-title="{{.SelectAll}}">
+                                                    <input type="checkbox" title="{{.Viewrole}}" style="display: none;" name="menus" id="Role" value="false">
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="custom-control-input user_option Sysconfig_role_view_dependent role-input" title="{{.Createrole}}" identity="Createrole" name="menus" id="Create_role" value="false">
+                                                <label class="custom-control-label" for="Create_role" data-toggle="tooltip" data-placement="top" data-original-title="{{.AddLabel}}"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="custom-control-input user_option Sysconfig_role_view_dependent role-input" title="{{.Updaterole}}" identity="Updaterole" name="menus" id="Update_role" value="false">
+                                                <label class="custom-control-label" for="Update_role" data-toggle="tooltip" data-placement="top" data-original-title="{{.UpdateLabel}}"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="custom-control-input user_option Sysconfig_role_view role-input" title="{{.Viewrole}}" identity="Viewrole" name="menus" id="View_role" value="false">
+                                                <label class="custom-control-label" for="View_role" data-toggle="tooltip" data-placement="top" data-original-title="{{.ViewLabel}}"></label>
+                                            </div>
+                                    </tr>
+                                    <tr class="treegrid-7 treegrid-parent-2">
+                                        <td class="align-left">{{.PrivilegesNew}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input id="privilege" type="checkbox" class="custom-control-input styled select-all privilege">
+                                                <label class="custom-control-label" for="privilege" data-toggle="tooltip" data-placement="top" data-original-title="{{.SelectAll}}"></label>
+                                                <input type="checkbox" title="{{.Viewprivileges}}" style="display: none;" name="menus" id="Privilege" value="false"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="custom-control-input user_option Sysconfig_privilege_view_dependent input-box privileges-input" title="{{.Updateprivileges}}" identity="Updateprivileges" name="menus" id="Update_privileges" value="false">
+                                                <label class="custom-control-label" for="Update_privileges" data-toggle="tooltip" data-placement="top" data-original-title="{{.UpdateLabel}}"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="custom-control-input user_option Sysconfig_privilege_view input-box privileges-input" title="{{.Viewprivileges}}" identity="Viewprivileges" name="menus" id="View_privileges" value="false">
+                                                <label class="custom-control-label" for="View_privileges" data-toggle="tooltip" data-placement="top" data-original-title="{{.ViewLabel}}"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="treegrid-3 treegrid-parent-2">
+                                        <td class="align-left">{{.Users}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input id="user" type="checkbox" class="custom-control-input styled select-all user">
+                                                <label class="custom-control-label" for="user" data-toggle="tooltip" data-placement="top" data-original-title="{{.SelectAll}}"></label>
+                                                <input type="checkbox" title="{{.Users}}" style="display: none;" identity="Users" name="menus" id="UsersMenu" value="false"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="user_option custom-control-input user_view_dependent user-input" title="{{.CreateUser}}" identity="CreateUser" name="menus" id="Create_User" value="false">
+                                                <label class="custom-control-label" for="Create_User" data-toggle="tooltip" data-placement="top" data-original-title="{{.AddLabel}}"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="user_option custom-control-input user_view_dependent user-input" title="{{.UpdateUser}}" identity="UpdateUser" name="menus" id="Update_User" value="false">
+                                                <label class="custom-control-label" for="Update_User" data-toggle="tooltip" data-placement="top" data-original-title="{{.UpdateLabel}}"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="user_option custom-control-input user_view user-input" title="{{.ViewUser}}" identity="ViewUser" name="menus" id="View_User" value="false">
+                                                <label class="custom-control-label" for="View_User" data-toggle="tooltip" data-placement="top" data-original-title="{{.ViewLabel}}"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="treegrid-9">
+                                        <td class="align-left">{{.Reporting}}
+                                            <input type="checkbox" title="{{.Reporting}}" identity="Reporting" style="display: none;" name="menus" id="Trans_Reports" value="false">
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="treegrid-10 treegrid-parent-9">
+                                        <td class="align-left">{{.TransactionReport}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="reportTransaction_option styled custom-control-input" identity="TransactionReport" title="{{.TransactionReport}}" name="menus" id="Transaction_Report">
+                                                <label class="custom-control-label" for="Transaction_Report" data-toggle="tooltip" data-placement="top" data-original-title="{{.TransactionReport}}"></label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="treegrid-18 treegrid-parent-9">
+                                        <td class="align-left">{{.TransactionReconReport}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="reportTransaction_option styled custom-control-input" identity="TransactionReconReport" title="{{.TransactionReconReport}}" name="menus" id="Recon_Report">
+                                                <label class="custom-control-label" for="Recon_Report" data-toggle="tooltip" data-placement="top" data-original-title="{{.TransactionReconReport}}"></label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="treegrid-16">
+                                        <td class="align-left">{{.ManualTransactionLabel}}
+                                            <input type="checkbox" title="{{.ManualTransactionLabel}}" identity="ManualTransactionLabel" style="display: none;" name="menus" id="ManualTransactionLabel" value="false">
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="treegrid-17 treegrid-parent-16">
+                                        <td class="align-left">{{.TransactionProcessing}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="reportTransactionProcessing_option styled custom-control-input" identity="TransactionProcessing" title="{{.TransactionProcessing}}" name="menus" id="TransactionProcessing_Menus">
+                                                <label class="custom-control-label" for="TransactionProcessing_Menus" data-toggle="tooltip" data-placement="top" data-original-title="{{.TransactionProcessing}}"></label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="treegrid-11">
+                                        <td class="align-left">{{.SyestemReports}}
+                                            <input type="checkbox" title="{{.Reports}}" identity="Reports" style="display: none;" name="menus" id="Reports" value="false">
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="treegrid-12 treegrid-parent-11">
+                                        <td class="align-left">{{.AuditReport}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="report_option styled custom-control-input" identity="AuditReport" title="{{.AuditReport}}" name="menus" id="Audit_Report">
+                                                <label class="custom-control-label" for="Audit_Report" data-toggle="tooltip" data-placement="top" data-original-title="{{.AuditReport}}"></label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="treegrid-13 treegrid-parent-11">
+                                        <td class="align-left">{{.ChannelReport}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="report_option styled custom-control-input" identity="ChannelReport" title="{{.ChannelReport}}" name="menus" id="Channel_Report">
+                                                <label class="custom-control-label" for="Channel_Report" data-toggle="tooltip" data-placement="top" data-original-title="{{.ChannelReport}}"></label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="treegrid-14 treegrid-parent-11">
+                                        <td class="align-left">{{.DebugLogReport}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="report_option styled custom-control-input" identity="DebugLogReport" title="{{.DebugLogReport}}" name="menus" id="DebugLogReport">
+                                                <label class="custom-control-label" for="DebugLogReport" data-toggle="tooltip" data-placement="top" data-original-title="{{.DebugLogReport}}"></label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                     <tr class="treegrid-15">
+                                        <td class="align-left">{{.ANALYTICS}}
+                                            <input type="checkbox" title="Analytics" identity="AnalyticsMenu" style="display: none;" name="menus" id="Analytics_Menu" value="false">
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                     <tr class="treegrid-14 treegrid-parent-15">
+                                        <td class="align-left">{{.ANALYTICS}}</td>
+                                        <td>
+                                            <div class="custom-control custom-checkbox custom-checkbox-success checkbox">
+                                                <input type="checkbox" class="analytics_option styled custom-control-input" identity="Analytics" title="Analytics" name="menus" id="analyticsId">
+                                                <label class="custom-control-label" for="analyticsId" data-toggle="tooltip" data-placement="top" data-original-title="{{.ANALYTICS}}"></label>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <!--   <tr class="treegrid-13">
+                                    <td class="align-left">{{.SystemMonitoring}}</td>
+                                    <td>
+                                        <div class="checkbox">
+                                            <input class="styled input-box" type="checkbox" id="SystemMonitoring" title="{{.SystemMonitoring}}" identity="SystemMonitoring" name="menus">
+                                            <label></label>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12 text-center">
+                        <button onclick="onSubmit()" type="button" class="btn btn-primary" id="Submit">{{.Submit}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}} {{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+<script src="/static/vendors/treegrid/js/jquery.treegrid.js"></script>
+{{template "themes/defaultscript.html".}}
+{{end}}

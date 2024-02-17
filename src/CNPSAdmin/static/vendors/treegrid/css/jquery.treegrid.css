@@ -1,0 +1,89 @@
+.treegrid-expander {
+	display: inline-block;
+	margin-left: -24px;
+	position: relative;
+	width: 24px;
+}
+.treegrid-expander {
+	vertical-align: middle;
+}
+.treegrid-expander::after {
+	border: 6px solid transparent;
+	content: ' ';
+	display: block;
+	height: 0;
+	left: 50%;
+	margin-left: -6px;
+	margin-top: -6px;
+	position: absolute;
+	top: 50%;
+	width: 0;
+}
+.treegrid-expander-expanded,
+.treegrid-expander-collapsed {
+	cursor: pointer;
+}
+.treegrid-expander-expanded::after {
+	border-top-color: #ccc;
+}
+.treegrid-expander-collapsed::after {
+	border-left-color: #ccc;
+}
+tr.loading>td>.treegrid-container>.treegrid-expander::after {
+	background: url('../images/loader.gif') center center no-repeat;
+	border: 0;
+	height: 16px;
+	margin-left: -8px;
+	margin-top: -8px;
+	width: 16px;
+}
+.treegrid-move-indicator {
+	border: 5px solid transparent;
+	border-left-color: #000;
+	display: none;
+	width: 0;
+	height: 0;
+	position: absolute;
+	margin-top: -5px;
+	margin-left: -6px;
+}
+.treegrid-container.dragging {
+	margin-left: 0 !important;
+	position: absolute;
+}
+
+
+.checkbox, .radio{
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+            display: inline !important;
+        }
+
+        .checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+    position: absolute !important;
+    margin-top: 10px !important;
+    margin-left: -17px !important;
+}
+.previlege-table .main-header th{
+    color: black !important;
+    font-weight: bolder !important;
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+.previlege-table th, td{
+color: black !important;
+    font-weight: bolder !important;
+    text-align: center;
+}
+.align-left{
+    text-align: left !important;
+}
+.previlege-table thead{
+    background-color: #e8e7e7;
+}
+.treegrid-expander-collapsed::after{
+        border-left-color: #003e8a !important;
+}
+.treegrid-expander-expanded::after {
+    border-top-color: #003f8a !important;
+}

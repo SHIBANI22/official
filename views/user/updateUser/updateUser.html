@@ -1,0 +1,124 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.Users}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchUser.Get"}}'>{{.ProfileManagement}}</a></li>
+             <li class="breadcrumb-item"><a href='{{urlfor "SearchUser.Get"}}'>{{.Users}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.UpdateUser}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+     {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}  
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">{{.Update}}
+                <a id="backButton" class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "ViewUser.Get" ":AdminID" .Id}}'> {{.Back}}</a></h6>
+            <hr />
+            <form class="needs-validation" id="userForm" action='{{urlfor "UpdateUser.Post" ":AdminID" .Id}}' method="post" novalidate="" autocomplete="off">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_first_name">{{.FirstName}}</label>
+                        <input type="text" class="form-control" value="{{.UserFirstName}}" name="input_user_first_name" id="input_user_first_name" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" required>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_middele_name">{{.MiddleName}}</label>
+                        <input type="text" class="form-control" name="input_user_middele_name" id="input_user_middele_name" value="{{.UserMiddleName}}" maxlength="30" oncopy="return false" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)">
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_last_name">{{.LastName}}</label>
+                        <input type="text" class="form-control" value="{{.UserLastName}}" name="input_user_last_name" id="input_user_last_name" maxlength="30" oncopy="return false" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" required>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_mobile">{{.Mobile}}</label>
+                        <input type="text" class="form-control" placeholder="Enter Mobile Number" value="{{.UserMobile}}" name="input_user_mobile" maxlength="10" minlength="8" id="input_user_mobile" required/>
+                        <div class="valid-feedback">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_email_id"> {{.Email}}</label>
+                        <input type="text" class="form-control" name="input_user_email_id" placeholder=Enter Email id oncopy="return false" onpaste="return false" id="input_user_email_id" value="{{.UserEmail}}" readonly required/>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_employee_id">{{.EmployeeId}}</label>
+                        <input type="text" class="form-control" value="{{.UserEmployeeID}}" name="input_user_employee_id" id="input_user_employee_id" maxlength="30" readonly required>
+                        <div class="valid-feedback"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_role">{{.Role}}</label>
+                        <select class="form-control select2" id="input_user_role" name="input_user_role" required>
+                            <option value="">{{.please_select}}</option>
+                            {{range $role := .DepartArray}}
+                            <option value="{{index $role 0}}" {{if eq (index $role 0) $.UserRoleId}} selected{{end}}>{{index $role 1}}</option>
+                            {{end}}
+                        </select>
+                        <div class="valid-feedback"></div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_contact_number">{{.ContectNumber}}</label> <input type="text" class="form-control" placeholder="{{.contactnumberPlaceholder}}" name="input_user_contact_number" value="{{.UserContactNumber}}" oncopy="return false" onpaste="return false" id="input_user_contact_number" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0' maxlength="10" minlength="8" autocomplete="off">
+                        <div class="valid-feedback"></div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_department">{{.Department}}</label>
+                        <input type="text" class="form-control" name="input_user_department" id="input_user_department" value="{{.UserDepartment}}" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" required>
+                        <div class="valid-feedback"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_language">{{.Language}}</label>
+                        <select class="form-control select2" style="width: 100%;" id="input_user_language" name="input_user_language" required>
+                            <option value="" {{if eq .UserLanguage ""}} selected{{end}}>{{.please_select}}</option>
+                            <option value="English" {{if eq .UserLanguage "English"}} selected{{end}}>{{.English}}</option>
+                            <option value="French" {{if eq .UserLanguage "French"}} selected{{end}}>{{.French}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_status">{{.Status}}</label>
+                        <select class="form-control select2" style="width: 100%;" id="input_user_status" name="input_user_status" required>
+                            <option value="" {{if eq .UserStatus ""}} selected{{end}}>{{.please_select}}</option>
+                            <option value="ACTIVE" {{if eq .UserStatus "ACTIVE"}} selected{{end}}>{{.Active}}</option>
+                            <option value="INACTIVE" {{if eq .UserStatus "INACTIVE"}} selected{{end}}>{{.InActive}}</option>
+                        </select>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-row">
+                    <div class="col-md-12 text-center">
+                        <input name="btnsubmit" id="submitBtn" type="submit" class="btn btn-primary" value="{{.Submit}}">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

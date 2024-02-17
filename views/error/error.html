@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CNPSAdmin | Error </title>
+    <link rel="shortcut icon" href="/static/assets/media/image/favicon.png" />
+    <link rel="stylesheet" href="/static/vendors/bundle.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/css/app.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/css/custom.css" type="text/css">
+</head>
+
+<body class="form-membership error-pageform">
+    <!-- begin::page loader-->
+    <div class="page-loader">
+        <div class="spinner-border"></div>
+    </div>
+    <!-- begin::form submit loader-->
+    <div class="form-loader" style="display: none;">
+        <div class="spinner-border"></div>
+    </div><br><br>
+    <!-- end::form submit loader -->
+    <form id="commonChangePass" action='{{urlfor "CommonChangePassword.Post"}}' method="post" enctype="multipart/form-data">
+        <div class="row row-sm commonchangescroll">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="logo logo-common">
+                        <img src="/static/assets/media/image/logo.png" alt="image">
+                    </div>
+                    <div class="card-body">
+                        <!--<a href="#"> <h6 onclick="myFunction2()"  id="language" name="language" class="pull-right">French</h6></a>-->
+                        <div class="tab-content p-t-0" id="myTabContent">
+                            <ul class="list-group list-group-flush">
+                                <div class="content-div">
+                                    <center>
+                                        <h3 class="text-red-small"><i class="fa fa-warning"></i> Oops! Something went wrong.</h3>
+                                        <h5>{{.msg}}</h5>
+                                        <p class="display-errormsg">
+                                            {{.DisplayMessage}}
+                                        </p>
+                                        <a href='{{urlfor "Login.Get"}}' class="btn btn-info"> Return to Login </a>
+                                    </center>
+                                </div>
+                            </ul><br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </form>
+    <!-- Plugin scripts -->
+    <script src="/static/vendors/bundle.js"></script>
+    <script src="/static/assets/js/app.min.js"></script>
+</body>
+
+</html>

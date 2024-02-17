@@ -1,0 +1,5 @@
+bin
+pkg
+src/CNPSAdmin/CNPSAdmin
+src/CNPSAdmin/.history/*
+src/CNPSAdmin/__debug_*

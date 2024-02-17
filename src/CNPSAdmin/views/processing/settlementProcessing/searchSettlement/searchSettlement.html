@@ -1,0 +1,128 @@
+{{template "themes/adminTemplate.html" .}} {{define "AdditionalStyles"}} {{end}} {{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.SettlementProcessing}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchSettlement.Get"}}'>{{.ManualTransaction}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchSettlement.Get"}}'>{{.SettlementProcessing}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.List}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}} {{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="">
+                    <div class="accordion custom-accordion">
+                        <div class="accordion-row open">
+                            <a href="#" class="accordion-header">
+                                <h6 class="card-title">{{.SearchFilters}}</h6>
+                                <i class="accordion-status-icon close fa fa-plus"></i>
+                                <i class="accordion-status-icon open fa fa-minus"></i>
+                            </a>
+                            <div class="accordion-body">
+                                <form class="" id="search_form" action='' method="post" novalidate="" autocomplete="off">
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_merchantId">{{.MerchantID}}</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="{{.MerchantID}}" name="input_merchantId" id="input_merchantId" onkeypress="return blockDisabledChar(event)" />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_settlementId">{{.SettlementID}}</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="{{.SettlementID}}" name="input_settlementId" id="input_settlementId" onkeypress="return blockDisabledChar(event)" />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_amount_in_pgs_base_currency">Amount In PGS Base Currency</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="{{.Amount}}" name="input_amount_in_pgs_base_currency" id="input_amount_in_pgs_base_currency" onkeypress="return blockDisabledChar(event)" />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                       
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_servicecharge_in_pgs_base_currency">ServiceCharge In PGS Base Currency</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="{{.ServiceCharge}}" name="input_servicecharge_in_pgs_base_currency" id="input_servicecharge_in_pgs_base_currency" onkeypress="return blockDisabledChar(event)" />
+                                        </div>
+
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_settlement_currency">Settlement Currency</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder="Settlement Currency" name="input_settlement_currency" id="input_settlement_currency" />
+                                        </div>
+                                       
+                                        <div class="col-md-4 mb-3">
+                                            <label for="daterange">{{.SettlementInitiatedDate}}</label>
+                                            <div class="input-group">
+                                                <input type="text" name="daterange" id="daterange" placeholder="{{.SettlementInitiatedDate}}" class="form-control simple-date-range-picker" readonly>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroupPrepend3"> <i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     
+                                    </div>
+                                  
+                                    <hr />
+                                    <div class="form-row">
+                                        <div class="col-md-12 text-center">
+                                            <button name="btnsubmit" type="button" id="Search" class="btn btn-primary">{{.GetRecords}}</button>
+                                            <button name="btnreset" type="button" id="Reset" class="btn btn-warning">{{.Reset}}</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{.List}}
+                    </h6>
+                    <hr />
+                    <div class="box-body table-responsive">
+                        <table id="listTable" class="listTable table-bordered table-striped tableListname" data-document-title='{{if eq .language "English"}}Settlement Details{{else}}Settlement Details{{end}}' data-url='{{urlfor "SearchSettlement.Post"}}' data-orderby="desc"
+                            orderby-column="3" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th id="MerchantId">{{.MerchantID}}</th>
+                                    <th id="SettlementId">{{.SettlementID}}</th>
+                                    <th id="Amount">Amount In PGS Base Currency</th>
+                                    <th id="ServiceCharge">ServiceCharge In PGS Base Currency</th>
+                                    <th id="ServiceCharge">Settlement Currency</th>
+                                    <th id="Amount">Amount In Settlement Currency</th>
+                                    <th id="ServiceCharge">ServiceCharge In Settlement Currency</th>
+                                    <th id="ServiceCharge">Conversion Rate</th>
+                                    <th id="MerchantInitiatedDate">{{.SettlementInitiatedDate}}</th>
+                                    <th id="Status1">{{.Status}}</th> 
+                                    <th id="Action">{{.Action}}</th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}} {{define "AdditionalScripts"}} {{template "default/menuPrivilege.html" .}} {{end}}

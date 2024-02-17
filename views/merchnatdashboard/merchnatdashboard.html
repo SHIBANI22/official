@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Supernet Admin</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" type="image/png" href="../../../static/resources/images/logo_start.png" />
+<link rel="stylesheet" href="../../static/resources/assets/vendor_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../static/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="../../static/resources/css/master_style.css">
+<link rel="stylesheet" href="../../../static/bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../../static/bower_components/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="../../../static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="../../../static/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="../../../static/dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="../../static/resources/css/bootstrap-extend.css">
+<link rel="stylesheet" href="../../static/resources/css/custome.css">
+<link rel="stylesheet" href="../../static/resources/css/loader-1.css">
+  <style>
+   
+  </style>
+  </head>
+<body class="hold-transition skin-orange sidebar-mini" onload="loadingBar()">
+<div class="loader-wrapper" id="loader-1">
+        <div id="loader"></div>
+    </div>
+<div id="header">{{.Header1}}</div>
+  <aside class="main-sidebar">
+			<section class="sidebar">
+				<div class="user-panel">
+					<div class="image">
+						<img src="../../../static/resources/images/logo_start.png"
+							alt="User Image">
+					</div>
+				</div>
+				<ul id="menus" class="sidebar-menu" data-widget="tree">
+					{{.Menus1}}
+				</ul>
+			</section>
+		</aside>
+  <div class="wrapper">
+  <div class="content-wrapper">
+    <section class="content-header">
+      <h1 id="dashboard"> {{.entityDashboard}} </h1>
+       <ol  class="breadcrumb">
+       <li id="dashboard" class="breadcrumb-item"><a href="/Dashboard"><i
+							class="fa fa-dashboard"></i> {{.entityDashboard}}</a></li>
+      </ol>
+       </section>
+         <form  action="/MerchantDashboard" method="get" autocomplete="off">
+					<section class="content">
+           
+            <div class="box box-orange effect1" style="background-color:#fff">
+              <div class="box-header with-border">
+            
+            
+
+						<div class="row">
+          <div class="col-md-4">
+          <div class="info-box bg-orange effect1 dash">
+                <div class="info-box-content">
+                 <span class="info-box-text2" id="TotalNumberOfTransactions"><i class="fa fa-calculator"></i>&nbsp&nbsp{{.TotalNumberOfTransactions}}</span>
+                <span class="info-box-number">{{.totaltransactioncount1}}</span>
+                <div class="progress">
+                  <div class="progress-bar" id="totContactsProgess"></div>
+                </div>
+                 <span class="info-box-text2" id="TotalAmountofTransactions"><i class="fa fa-money money"></i>&nbsp&nbsp{{.TotalAmountofTransactions}}</span>
+                  <span class="info-box-number">{{.totaltransactionamount1}}&nbsp&nbspXOF</span>
+                
+              </div>
+            </div>
+            </div>
+            <div class="col-md-4">
+          <div class="info-box bg-orange effect1 dash" >
+                <div class="info-box-content">
+                 <span class="info-box-text2" id="TotalSuccessfulTransactions"><i class="fa fa-calculator"></i>&nbsp&nbsp{{.TotalSuccessfulTransactions}}</span>
+                <span class="info-box-number">{{.totaltsuccessfulransactioncount1}}</span>
+                <div class="progress">
+                  <div class="progress-bar" id="totContactsProgess"></div>
+                </div>
+                 <span class="info-box-text2" id="TotalAmountofSuccessfulTransactions"><i class="fa fa-money money"></i>&nbsp&nbsp{{.TotalAmountofSuccessfulTransactions}}</span>
+                  <span class="info-box-number">{{.totaltsuccessfulransactionamount1}}&nbsp&nbspXOF</span>
+                
+              </div>
+            </div>
+            </div>
+            <div class="col-md-4">
+          <div class="info-box bg-orange effect1 dash" >
+                <div class="info-box-content">
+                 <span class="info-box-text2" id="TotalDeclinedTransactions"><i class="fa fa-calculator"></i>&nbsp&nbsp{{.TotalDeclinedTransactions}}</span>
+                <span class="info-box-number">{{.toatldeclinedtransactioncount1}}</span>
+                <div class="progress">
+                  <div class="progress-bar" id="totContactsProgess"></div>
+                </div>
+                 <span class="info-box-text2" 	id="TotalAmountofSuccessfulTransactions"><i class="fa fa-money money"></i>&nbsp&nbsp{{.TotalAmountofDeclinedTransactions}}</span>
+                  <span class="info-box-number">{{.toatldeclinedtransactionamount1}}&nbsp&nbspXOF</span>
+                
+              </div>
+            </div>
+            </div>
+            </div>
+            <br>
+						<div class="row">
+						 
+							<div class="col-xl-12 col-12">
+								<div class="box">
+									<div class="box-header with-border">
+										<h3 class="box-title" id="TrandDetails">{{.TrandDetails}}</h3>
+									</div>
+									<div>
+										<div id="chart-bar"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+				</form>
+       
+  </div>
+  <div id="footer"></div>
+</div>
+ <script src="../../../static/resources/assets/vendor_components/jquery/dist/jquery.min.js"></script>
+	<script src="../../../static/resources/assets/vendor_components/popper/dist/popper.min.js"></script>
+	<script src="../../static/resources/assets/vendor_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../../../static/resources/assets/vendor_components/jquery-slimscroll/jquery.slimscroll.js"></script>
+	<script src="../../../static/resources/assets/vendor_components/chart.js-master/Chart.min.js"></script>
+	<script src="../../../../static/resources/assets/vendor_components/fastclick/lib/fastclick.js"></script>
+	<script src="../../../static//resources/js/demo.js"></script>
+	<script src="../../../static/dist/js/adminlte.min.js"></script>
+	<script src="../../../static/resources/js/pages/widget-charts2.js"></script>
+	<script src="../../../static/resources/js/highcharts.js"></script>
+  <script src="../../static/resources/js/apps.min.js"></script>
+   <script src="../../static/resources/js/jquery-ui.min.js"></script>
+  <script src="../../static/resources/js/jquery-ui.min.js"></script>
+<script> 
+var language ={{.language}}
+    sessionStorage.setItem("language", language);  
+function loadingBar(){
+     var loader =document.getElementsByClassName("loader-wrapper");
+   setTimeout(function(){
+        $("#loader-1").attr("style","display:none")
+    },1000);
+  }
+$(function(){
+  $("#footer").load("../../../static/commonfiles/footer.html"); 
+});
+$(document).ready(function(){
+   var lang = sessionStorage.getItem("language");  
+   var langObjectCu = ''; 
+  if(lang == 'French'){
+    
+    $.getScript("../../static/resources/js/language/msg_fr.js",function(data, textStatus, jqxhr){
+    dataLoad();
+     
+    });
+   }else{
+      $.getScript("../../static/resources/js/language/msg_en.js",function(data, textStatus, jqxhr){
+    dataLoad();
+    });
+  }
+    function dataLoad(){ 
+    langObjectCu = langObject;
+    //alert(langObjectCu.Enter_New_Password);
+   
+     var TotalTxn =+{{.totaltsuccessfulransactioncount1}};
+     var TotalDeclainedTxn =+{{.toatldeclinedtransactioncount1}};
+     var Total =+{{.totaltransactioncount1}};
+    
+   Highcharts.chart('chart-bar', {
+    chart: {
+        type: 'column'
+    },
+     xAxis: {
+        categories: [
+            langObjectCu.Transaction_Details
+             
+        ],
+        crosshair: true
+    },
+     
+    tooltip: {
+	        pointFormat: '{series.name}'
+	    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        },
+        series: {
+		            pointWidth: 30
+		        }
+    },
+    series: [{
+        name: langObjectCu.Success +TotalTxn,
+        data: [TotalTxn]
+    },{
+         name: langObjectCu.Declined +TotalDeclainedTxn,
+        data: [TotalDeclainedTxn],
+    },{
+         name: langObjectCu.Total +Total,
+        data: [Total],
+    }],
+});
+    }
+
+ });
+</script>
+</body>
+</html>

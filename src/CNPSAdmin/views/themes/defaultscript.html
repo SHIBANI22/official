@@ -1,0 +1,303 @@
+<!-- Jquery TreePlugin -->
+<script>
+$(document).ready(function() {
+    $('.tree-basic').treegrid();
+    $(".select-all").click(function() {
+        if ($(this).is(":checked")) {
+            //console.log($(this).parents("tr"));
+            $(this).parents("tr").find(".checkbox input").prop("checked", true);
+        } else {
+            $(this).parents("tr").find(".checkbox input").prop("checked", false);
+        }
+    });
+
+    var DepartmentMenus = {{.DepartmentMenus }};
+    var inputjson = JSON.parse(DepartmentMenus);
+    var checkboxes = document.getElementsByName("menus");
+    //console.log(inputjson);
+    //console.log(checkboxes);
+    // console.log("end");
+    $.each(inputjson, function(i, obj) {
+        //console.log(i);
+        if (obj.status == 'true') {
+            // console.log(checkboxes[i]);
+            checkboxes[i].checked = true
+        }
+    });
+
+    
+    $(".user_view_dependent").on('change', function() {
+
+        if ($(this).is(':checked')) {
+            document.getElementById("View_User").checked = true;
+
+        }
+    });
+
+    $(".user_view").on('change', function() {
+
+
+        if ($(this).is(':checked')) {
+
+        } else {
+            document.getElementById("Create_User").checked = false;
+            document.getElementById("Update_User").checked = false;
+        }
+    });
+
+    $(".Sysconfig_sw_view_dependent").on('change', function() {
+
+        if ($(this).is(':checked')) {
+            document.getElementById("View_Switch_Status").checked = true;
+        }
+    });
+
+    $(".Sysconfig_sw_view").on('change', function() {
+
+        if ($(this).is(':checked')) {
+
+        } else {
+            document.getElementById("Update_Switch_Status").checked = false;
+        }
+    });
+
+    $(".Sysconfig_role_view_dependent").on('change', function() {
+
+        if ($(this).is(':checked')) {
+            document.getElementById("View_role").checked = true;
+        }
+    });
+
+    $(".Sysconfig_role_view").on('change', function() {
+
+        if ($(this).is(':checked')) {
+
+        } else {
+            document.getElementById("Create_role").checked = false;
+            document.getElementById("Update_role").checked = false;
+
+        }
+    });
+
+    $(".Sysconfig_privilege_view_dependent").on('change', function() {
+
+        if ($(this).is(':checked')) {
+            document.getElementById("View_privileges").checked = true;
+        }
+    });
+
+    $(".Sysconfig_privilege_view").on('change', function() {
+
+        if ($(this).is(':checked')) {
+
+        } else {
+            document.getElementById("Update_privileges").checked = false;
+
+        }
+    });
+
+    $(".Sysconfig_chn_view_dependent").on('change', function() {
+
+        if ($(this).is(':checked')) {
+            document.getElementById("View_Channels").checked = true;
+        }
+    });
+
+    $(".Sysconfig_chn_view").on('change', function() {
+
+        if ($(this).is(':checked')) {
+
+        } else {
+            document.getElementById("Update_Channels").checked = false;
+        }
+    });
+    
+    $(".user-input").change(function() {
+        if ($(".user-input").length == $(".user-input:checked").length) {
+            $(".user").prop("checked", true);
+        } else {
+            $(".user").prop("checked", false);
+        }
+    });
+
+    if ($(".user-input").length == $(".user-input:checked").length) {
+            $(".user").prop("checked", true);
+        } else {
+            $(".user").prop("checked", false);
+    }
+
+    $(".switch-input").change(function() {
+        if ($(".switch-input").length == $(".switch-input:checked").length) {
+            $(".pgw").prop("checked", true);
+        } else {
+            $(".pgw").prop("checked", false);
+        }
+    });
+
+    if ($(".switch-input").length == $(".switch-input:checked").length) {
+      
+            $(".pgw").prop("checked", true);
+        } else {
+            $(".pgw").prop("checked", false);
+    }
+
+    $(".role-input").change(function() {
+        if ($(".role-input").length == $(".role-input:checked").length) {
+            $(".role").prop("checked", true);
+        } else {
+            $(".role").prop("checked", false);
+        }
+    });
+
+    if ($(".role-input").length == $(".role-input:checked").length) {
+            $(".role").prop("checked", true);
+        } else {
+            $(".role").prop("checked", false);
+    }
+
+    $(".privileges-input").change(function() {
+        if ($(".privileges-input").length == $(".privileges-input:checked").length) {
+            $(".privilege").prop("checked", true);
+        } else {
+            $(".privilege").prop("checked", false);
+        }
+    });
+
+    if ($(".privileges-input").length == $(".privileges-input:checked").length) {
+            $(".privilege").prop("checked", true);
+        } else {
+            $(".privilege").prop("checked", false);
+    }
+
+    $(".channel-input").change(function() {
+        if ($(".channel-input").length == $(".channel-input:checked").length) {
+            $(".channel").prop("checked", true);
+        } else {
+            $(".channel").prop("checked", false);
+        }
+    });
+
+    if ($(".channel-input").length == $(".channel-input:checked").length) {
+            $(".channel").prop("checked", true);
+        } else {
+            $(".channel").prop("checked", false);
+    }
+
+
+});
+
+var numberOfCheckedItems;
+
+function updateJson() {
+    var checkeduseroption = $('.user_option:checked').length;
+    if (checkeduseroption > 0) {
+
+        document.getElementById("Profile_Managment").checked = true;
+        document.getElementById("UsersMenu").checked = true;
+         
+    } else {
+        document.getElementById("Profile_Managment").checked = false;
+         document.getElementById("UsersMenu").checked = false;
+    }
+
+    var checkedsysoption = $('.Sysconfig_option:checked').length;
+
+    if (checkedsysoption > 0) {
+
+        document.getElementById("System_Configuration").checked = true;
+
+    } else {
+
+        document.getElementById("System_Configuration").checked = false;
+    }
+
+    var checkedrepoption = $('.report_option:checked').length;
+
+    if (checkedrepoption > 0) {
+
+        document.getElementById("Reports").checked = true;
+
+    } else {
+
+        document.getElementById("Reports").checked = false;
+    }
+
+    var checkedtrnsrepoption = $('.reportTransaction_option:checked').length;
+
+    if (checkedtrnsrepoption > 0) {
+
+        document.getElementById("Trans_Reports").checked = true;
+
+    } else {
+
+        document.getElementById("Trans_Reports").checked = false;
+    }
+
+    var checkedtransProcoption = $('.reportTransactionProcessing_option:checked').length;
+
+    if (checkedtransProcoption > 0) {
+
+        document.getElementById("ManualTransactionLabel").checked = true;
+
+    } else {
+
+        document.getElementById("ManualTransactionLabel").checked = false;
+    }
+
+    var checkedanalyticsoption = $('.analytics_option:checked').length;
+
+    if (checkedanalyticsoption > 0) {
+
+        document.getElementById("Analytics_Menu").checked = true;
+
+    } else {
+
+        document.getElementById("Analytics_Menu").checked = false;
+    }
+
+
+    jsonObj = [];
+
+    numberOfCheckedItems = 0;
+    var checkboxes = document.getElementsByName("menus");
+    for (var i = 0; i < checkboxes.length; i++) {
+
+        item = {}
+        if (checkboxes[i].checked) {
+            numberOfCheckedItems++;
+            //console.log($(checkboxes[i]).attr("identity"));
+            //console.log(checkboxes[i]);
+            item["identity"] = $(checkboxes[i]).attr("identity");
+            item["status"] = "true";
+            jsonObj.push(item);
+        } else {
+            item["identity"] = $(checkboxes[i]).attr("identity");
+            item["status"] = "false";
+
+            jsonObj.push(item);
+        }
+    }
+
+    $('#FinalJson').text(JSON.stringify(jsonObj));
+    //  console.log(jsonObj);
+    document.getElementById("Json").value = JSON.stringify(jsonObj);
+}
+
+function onSubmit() {
+    updateJson()
+    var checkboxes = document.getElementsByName("menus");
+    var Language = {{.Language}}
+    // console.log("***************************************8Language" + Language);
+
+    if (numberOfCheckedItems > 0) {
+        $("#updatePrivilege").submit();
+    } else {
+        if (Language == "English") {
+            alert("Select atleast 1 checkboxes");
+        } else {
+            alert("Cochez au moins une case");
+        }
+
+    }
+}
+</script>

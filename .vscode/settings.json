@@ -1,0 +1,9 @@
+{ 
+    "go.toolsEnvVars":{
+        "GO111MODULE": "off"
+    },
+    "go.gopath": "/home/stanley/Documents/CNPS-Latest/Common:/home/stanley/Documents/SuperPGS/Admin/SuperPgsAdmin",
+    "go.delveConfig":{
+        "debugAdapter":"legacy"
+    }
+}

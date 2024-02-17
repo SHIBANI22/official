@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CNPSAdmin Admin | Log in</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/media/image/favicon.png" />
+    <!-- Plugin styles -->
+    <link rel="stylesheet" href="/static/vendors/bundle.css" type="text/css">
+    <!-- App styles -->
+    <link rel="stylesheet" href="/static/assets/css/app.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/vendors/select2/css/select2.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/css/custom.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/css/duDialog.css">
+</head>
+
+<body class="form-membership">
+    <!-- begin::page loader-->
+    <div class="page-loader">
+        <div class="spinner-border"></div>
+    </div>
+    <!-- end::page loader -->
+     <!-- begin::form submit loader-->
+    <div class="form-loader" style="display: none;">
+        <div class="spinner-border"></div>
+    </div>
+    <!-- end::form submit loader -->
+    <div class="form-wrapper">
+        <!-- logo -->
+        <div class="logo">
+            <img src="/static/assets/media/image/login-logo.png" alt="image">
+        </div>
+        <h5 class="site-title">Portail Admin Supernet</h5>
+        <!-- ./ logo -->
+        <h5 id="signin-title" class="default-page-title">Sign in</h5>
+        <!-- form -->
+        <form id="login" action='{{urlfor "Login.Post"}}' method="post" autocomplete="off">
+            <div class="form-row">
+                <label id="uname"> </label>
+                <input type="text" class="form-control" placeholder="Enter Email ID" name="username" id="username" maxlength="80" onkeypress="return blockDisabledChar(event)">
+            </div>
+            <div class="form-row">
+                <label id="pass" class="pull-left"> </label> <input type="password" class="form-control" placeholder="Password" name="password" autocomplete='off' id="password" maxlength="16">
+            </div>
+            <div class="form-row">
+                <label id="lang"> </label>
+                <select class="form-control" id="language" name="language">
+                    <option value="French" id="fr"> </option>
+                    <option value="English" id="eng"></option>
+                </select>
+            </div>
+            <div class="form-row d-flex justify-content-between mb-3">
+                <div class="custom-control custom-checkbox">
+                    <!-- <input type="checkbox" class="custom-control-input" checked="" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1">Remember me</label> -->
+                </div>
+                <a href='{{urlfor "ForgotPassword.Get"}}' id="forgot">Reset password</a>
+            </div>
+            <button class="btn btn-primary btn-block" id="signin-button">Sign in</button>
+        </form>
+        <!-- ./ form -->
+    </div>
+    <!-- Plugin scripts -->
+    <script src="/static/vendors/bundle.js"></script>
+    <!-- App scripts -->
+    <script src="/static/assets/js/app.min.js"></script>
+    <script src="/static/assets/js/jquery.validate.min.js"></script>
+    <script src="/static/assets/js/validation.js"></script>
+    <script src="/static/vendors/PACE/pace.min.js"></script>
+    <script src="/static/assets/js/duDialog.js"></script>
+    <script src="/static/vendors/select2/js/select2.min.js"></script>
+    <script src="/static/assets/js/custom.js"></script>
+    <script>
+    $(document).ready(function() {
+        var msg = {{.DisplayMessage }};
+        var okTextLabel = {{.OKLABEL}};
+        if (msg != null) {
+            var withoutSpace = msg.trim();
+            if (msg != '' && withoutSpace != '') {
+                new duDialog('', msg, duDialog.DEFAULT, {okText: okTextLabel});
+            }
+        }
+    });
+    </script>
+</body>
+
+</html>

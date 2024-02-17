@@ -1,0 +1,63 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.Roles}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchRole.Get"}}'>{{.ProfileMgmt}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchRole.Get"}}'>{{.Roles}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.AddRole}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+     {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}  
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{.AddRole}}
+                        <a id="backButton" class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "SearchRole.Get"}}'> {{.Back}}</a>
+                    </h6>
+                    <hr />
+                    <form class="needs-validation" id="roleForm" action='{{urlfor "CreateRole.Post"}}' method="post" novalidate="" autocomplete="off">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="input_role_name">{{.EnterRoleName}}</label>
+                                <input type="text" class="form-control" placeholder={{.EnterRoleName}} name="input_role_name" id="input_role_name" maxlength="35" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" required>
+                                <input type="text" class="form-control" name="Json" id="Json" style="display: none;">
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-row">
+                            <div class="col-md-12 text-center">
+                                <button name="submit" type="submit" id="submitBtn" class="btn btn-primary">{{.Submit}}</button>
+                                <a href='{{urlfor "SearchRole.Get"}}' type="button" class="btn btn-warning" id="Reset">{{.Cancel}}</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

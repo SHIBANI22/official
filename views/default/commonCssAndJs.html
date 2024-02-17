@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Supernet Admin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/png" href="../../../static/resources/images/logo_start.png" />
+<link rel="stylesheet" href="../../static/resources/assets/vendor_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../static/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="../../static/resources/css/master_style.css">
+<link rel="stylesheet" href="../../../static/bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="../../../static/bower_components/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="../../../static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+<link rel="stylesheet" href="../../../static/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="../../../static/dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="../../static/resources/css/bootstrap-extend.css">
+<link rel="stylesheet" href="../../static/resources/css/duDialog.css">
+<link rel="stylesheet" href="../../static/resources/css/custome.css">
+<link rel="stylesheet" href="../../static/resources/css/loader-1.css">
+<link rel="stylesheet" type="text/css" href="../../static/plugins/treegrid/css/jquery.treegrid.css">
+<link rel="stylesheet" type="text/css" href="../../static/plugins/treegrid/css/awesome-bootstrap-checkbox.css">
+</head>
+<body class="hold-transition skin-orange sidebar-mini" onload="loadingBar()">
+   <div class="loader-wrapper" id="loader-1">
+        <div id="loader"></div>
+    </div>
+	<div id="header">{{.Header}}</div>
+	<aside class="main-sidebar">
+		<section class="sidebar">
+			<div class="user-panel">
+				<div class="image">
+					<img src="../../../static/resources/images/logo_start.png"
+						alt="User Image">
+				</div>
+			</div>
+			<ul id="menus" class="sidebar-menu" data-widget="tree">
+				{{.Menus}}
+			</ul>
+		</section>
+	</aside>
+  
+  
+	 
+    
+   {{block "content".}}{{end}}
+  
+   <footer class="main-footer">
+    <div class="pull-right d-none d-sm-inline-block">
+        <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
+		  <li class="nav-item">
+		  </li>
+		  <li class="nav-item">
+		  </li>
+		</ul>
+    </div>
+	  &copy; 2019 <a href="#">Supernet</a> | Conception Supernet Technologies
+  </footer>
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+ <script src="../../static/resources/assets/vendor_components/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script src="../../static/bower_components/fastclick/lib/fastclick.js"></script>
+ <script src="../../static/bower_components/select2/dist/js/select2.full.min.js"></script>
+ <script src="../../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+ <script src="../../static/bower_components/moment/min/moment.min.js"></script>
+<script src="../../static/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+ <script src="../../static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../../static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script src="../../static/resources/js/dataTables.buttons.min.js"></script>
+<script src="../../static/bower_components/datatables.net-bs/js/buttons.flash.min.js"></script>
+<script src="../../static/resources/js/buttons.html5.min.js"></script>
+<script src="../../static/bower_components/datatables.net-bs/js/buttons.print.min.js"></script>
+<script src="../../static/resources/js/jszip.min.js"></script>
+<script src="../../static/resources/js/pdfmake.min.js"></script>
+<script src="../../static/resources/js/vfs_fonts.js"></script>
+ <script src="../../static/dist/js/adminlte.min.js"></script>
+ <script src="../../static/bower_components/PACE/pace.min.js"></script>
+ <script src="../../static/dist/js/demo.js"></script>
+ <script src="../../static/resources/js/jquery.validate.min.js"></script>
+ <script src="../../static/resources/js/validation/validation.js"></script>
+ <script src="../../static/resources/js/duDialog.js"></script>
+ <script src="../../static/plugins/treegrid/js/jquery.treegrid.js"></script>
+
+<script type="text/javascript">
+$("#logout").click(function(){
+    sessionStorage.getItem("language", $("#input_user_language").val());  
+    sessionStorage.removeItem("language");
+  })
+  
+  
+//block special characters with number
+
+function blockDisabledChar(e) {
+var k = e.keyCode;
+if(k == 60 || k == 62 || k==39 || k==34 || k==40 || k==41 || k == 37 || k == 96 || k == 33 || k == 47 || k == 59 ){
+return false
+}
+}
+
+function blockSpecialCharwithNumber(e) {
+var k = e.keyCode;
+return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k ==32 || k == 39 );
+}
+//block special characters only
+function blockSpecialChar(e) {
+            var k = e.keyCode;
+            return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8   || (k >= 48 && k <= 57));
+}
+  
+function loadingBar(){
+     var loader =document.getElementsByClassName("loader-wrapper");
+   setTimeout(function(){
+        $("#loader-1").attr("style","display:none")
+    },1000);
+  }
+  // To make Pace works on Ajax calls
+  $(document).ajaxStart(function () {
+    Pace.restart()
+     var msg ={{ .DisplayMessage }} ;
+ var withoutSpace = msg.trim();
+	if(msg != ''&&withoutSpace!=''){
+		new duDialog('', msg);
+	}
+  
+  	var viewStatus = {{.Status}};
+	if(viewStatus === "ACTIVE"){
+			$("#viewStatusColor").css("color", "green");
+	}else if(viewStatus === "INACTIVE"){
+			$("#viewStatusColor").css("color", "red");
+	}
+  })
+  
+   $(function () {
+    $('.select2').select2()
+    var language = {{.language}}
+    var TodayLabel = YesterdayLabel = thisMonthLabel = lastMonthLabel = last7DaysLabel = last30DaysLabel = "";
+    if(language == "English"){
+      TodayLabel = "Today"
+      YesterdayLabel = "Yesterday"
+      thisMonthLabel = "This Month"
+      lastMonthLabel = "Last Month"
+      last7DaysLabel = "Last 7 Days"
+      last30DaysLabel = "Last 30 Days"
+      customRangeLabel = "Custom Range"
+      applyLabel = "Apply"
+      cancelLabel ="Cancel"
+    }else{
+      TodayLabel = "Aujourd'hui"
+      YesterdayLabel = "Hier"
+      thisMonthLabel ="Ce mois-ci"
+      lastMonthLabel ="Le mois dernier"
+      last7DaysLabel = "Les 7 derniers jours"
+      last30DaysLabel = "Les 30 derniers jours"
+      customRangeLabel = "Période"
+      applyLabel = "Valider"
+      cancelLabel ="Annuler"
+    }
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          
+          [TodayLabel]       : [moment(), moment()],
+          [YesterdayLabel]   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          [last7DaysLabel] : [moment().subtract(6, 'days'), moment()],
+          [last30DaysLabel]: [moment().subtract(29, 'days'), moment()],
+          [thisMonthLabel]  : [moment().startOf('month'), moment().endOf('month')],
+          [lastMonthLabel]  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        locale:{
+          customRangeLabel: customRangeLabel,
+          applyLabel: applyLabel,
+          cancelLabel: cancelLabel
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#daterange-btn span').html(start.format('YYYY/MMMM/D') + ' - ' + end.format('YYYY/MMMM/D'))
+           }
+    )
+  });
+
+   $(document).ready(function() {
+        $('.tree-basic').treegrid();
+        $(".select-all").click(function(){
+          if($(this).is(":checked")){
+          //console.log($(this).parents("tr"));
+          $(this).parents("tr").find(".input-box").prop("checked", true);
+          }else{
+            $(this).parents("tr").find(".input-box").prop("checked", false);
+          }
+        });
+        $("#channel").prop("checked", false);
+        if($(".channel-input").length == $(".channel-input:checked").length){
+          $("#channel").prop("checked", true);
+        }
+         $("#role").prop("checked", false);
+        if($(".role-input").length == $(".role-input:checked").length){
+          $("#role").prop("checked", true);
+        }
+        $("#privilege").prop("checked", false);
+        if($(".privilege-input").length == $(".privilege-input:checked").length){
+          $("#privilege").prop("checked", true);
+        }
+        $("#pgw").prop("checked", false);
+        if($(".switch-input").length == $(".switch-input:checked").length){
+          $("#pgw").prop("checked", true);
+        }
+        $(".user").prop("checked", false);
+        if($(".user-input").length == $(".user-input:checked").length){
+          $(".user").prop("checked", true);
+        }
+    });
+</script>
+</body>
+</html>

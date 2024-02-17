@@ -1,0 +1,66 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">Switch Status</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+           <li class="breadcrumb-item"><a href='{{urlfor "ViewStatus.Get"}}'>{{.SystemConfiguration}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "ViewStatus.Get"}}'>{{.SwtichStatus}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.Update}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+     {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}} 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{.Update}}
+                     <a class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "Viewswtichstatus.Get"}}'> {{.Back}}</a>
+                    </h6>
+                    <hr />
+                    <form class="needs-validation" id="switchForm" action='{{urlfor "Updateswtichstatus.Post"}}' method="post" novalidate="" autocomplete="off">
+                        <div class="form-row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="input_swtichstatus">{{.SwtichStatus}}</label>
+                                    <select class="form-control select2" id="input_swtichstatus" name="input_swtichstatus" required>
+                                        <option value="">{{.please_select}}</option>
+                                        <option value="ACTIVE" {{if eq .Status "ACTIVE"}}selected{{end}}>{{.Active}}</option>
+                                        <option value="INACTIVE" {{if eq .Status "INACTIVE"}}selected{{end}}>{{.InActive}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12 text-center">
+                                <button name="submit" type="submit" id="submitBtn" class="btn btn-primary">{{.Submit}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

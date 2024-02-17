@@ -1,0 +1,295 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title titleColor">Payment Gateway Switch</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.Dashboard2}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    <div class="row">
+        <div id="myDIV">
+            <marquee style="color:red; font-size:15px" >{{.Msg}}</marquee>
+            <br><br>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 class="font-weight-bold mb-2">{{.totaltransactioncount}}</h2>
+                            <h6 class="text-uppercase font-size-11 mb-2 text-primary font-weight-bold">{{.TotalTransactions}}</h6>
+                            <p class="m-0 small text-muted">{{.TotalNumberOfTransactions}}</p>
+                            <p></p>
+                        </div>
+                        <div>
+                            <span class="dashboard-pie-1">1/5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 class="font-weight-bold mb-2">{{.totaltsuccessfulransactioncount}}</h2>
+                            <h6 class="text-uppercase font-size-11 mb-2 text-success font-weight-bold">{{.SuccessfulTransactions}}</h6>
+                            <p class="m-0 small text-muted">{{.TotalSuccessfulTransactions}}
+                            {{if eq .language "English"}}
+                            <br> Transactions{{else}} <br> refusées {{end}}
+                            </p>
+                        </div>
+                        <div>
+                            <span class="dashboard-pie-2">4/5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 class="font-weight-bold mb-2">{{.toatldeclinedtransactioncount}}</h2>
+                            <h6 class="text-uppercase font-size-11 mb-2 text-warning font-weight-bold">{{.DeclainedTransactions}}</h6>
+                            <p class="m-0 small text-muted">{{.TotalDeclinedTransactions}}
+                            {{if eq .language "English"}}
+                            <br> Transactions{{else}} <br> refusées {{end}}
+                            </p>
+                        </div>
+                        <div>
+                            <span class="dashboard-pie-3">1/5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6 col-lg-12 col-md-12">
+            <div class="card card-body">
+                <div class="d-md-flex align-items-center">
+                    <div class="position-relative mr-lg-3 text-center">
+                        <div class="icon-block m-r-15 icon-block-lg icon-block-outline-success text-success">
+                            <i class="fa fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="text-xs-center">
+                        <h6 class="m-b-10">{{.TotalNumberAdminUsers}}</h6>
+                        <p class="text-muted m-b-10">
+                            <small>{{.CnpsPortalAdminUsers}}</small>
+                        </p>
+                        <h3 class="mb-0">{{.admincount}}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-md-12">
+            <div class="card card-body">
+                <div class="d-md-flex align-items-center">
+                    <div class="position-relative mr-lg-3 text-center">
+                        <div class="icon-block m-r-15 icon-block-lg icon-block-outline-warning text-warning">
+                            <i class="fa fa-google-wallet font-size-16"></i>
+                        </div>
+                    </div>
+                    <div class="text-xs-center">
+                        <h6 class="m-b-10">{{.TotalNumberChannels}}</h6>
+                        <p class="text-muted m-b-10">
+                            <small>{{.CnpsPortalPaymentChannels}}</small>
+                        </p>
+                        <h3 class="mb-0">{{.ChannelsCount}}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-6 col-lg-12 col-md-12">
+            <div class="card card-body">
+                <div class="box-header with-border">
+                    <h5 class="box-title" id="UserDetails">{{.UserDetails}}</h5>
+                </div>
+                <div>
+                    <div id="pie-Chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-12 col-md-12">
+            <div class="card card-body">
+                <div class="box-header with-border">
+                    <h5 class="box-title" id="TrandDetails">{{.TrandDetails}}</h5>
+                </div>
+                <div>
+                    <div id="chart-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+<!-- Chartjs -->
+<script src="/static/assets/js/highcharts.js"></script>
+<script src="/static/vendors/charts/apex/apexcharts.min.js"></script>
+<script src="/static/vendors/charts/chartjs/chart.min.js"></script>
+<!-- Dashboard scripts -->
+<script src="/static/assets/js/examples/dashboard.js"></script>
+<!-- Peity -->
+<script src="/static/vendors/charts/peity/jquery.peity.min.js"></script>
+<script src="/static/assets/js/examples/charts/peity.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
+var x = document.getElementById("myDIV");
+var From = {{.From}};
+var To = {{.To}};
+if(dateCheck(From,To,today)){
+  x.style.display = "block";
+} else {
+  x.style.display = "none";
+}
+
+function dateCheck(from,to,check) {
+
+    var fDate,lDate,cDate;
+    fDate = Date.parse(from);
+    lDate = Date.parse(to);
+    cDate = Date.parse(check);
+
+    if((cDate <= lDate && cDate >= fDate)) {
+        return true;
+    }
+    return false;
+}
+   var language = $("#language").val();
+   // alert(language);
+    var greetMessage = "Bienvenue! Portail Supernet";
+    if (language == "English" || language == "EN") {
+        greetMessage = "Welcome! Supernet Portal";
+    }
+    setTimeout(function() { toastr.options = { timeOut: 3e3, progressBar: !0, showMethod: "slideDown", hideMethod: "slideUp", showDuration: 200, hideDuration: 200 }, toastr.success(greetMessage) }, 1e3)
+});
+
+$(document).ready(function() {
+ var language = $("#language").val();
+    //alert(language +"s");
+    var validationMsg = {};
+    if (language == "English" || language == "ENGLISH") {
+        validationMsg.Transactiondetails = "Transaction Details";
+        validationMsg.Success = "SUCCESS";
+        validationMsg.Decalined = "DECLINED";
+        validationMsg.Total = "TOTAL";
+        validationMsg.AdminUsers = "Supernet ADMINS";
+        validationMsg.MerchantUsers ="MERCHANTS";
+        validationMsg.UserDetails="UserDetails"
+       
+    } else {
+        validationMsg.Transactiondetails = "Détails Transaction";
+        validationMsg.Success = "RÉUSSIES";
+        validationMsg.Decalined = "REFUSÉES";
+        validationMsg.Total = "TOTAL";
+        validationMsg.AdminUsers = "Utilisateurs Supernet";
+        validationMsg.MerchantUsers ="Partenaire";
+         validationMsg.UserDetails="Informations Utilisateurs"
+        
+    }
+    var SuccessTxn = +{{.totaltsuccessfulransactioncount }};
+    var TotalDeclainedTxn = +{{.toatldeclinedtransactioncount }};
+    var Total = +{{.totaltransactioncount }};
+
+    Highcharts.chart('chart-bar', {
+        chart: {
+            type: 'column'
+        },
+        xAxis: {
+            categories: [
+               validationMsg.Transactiondetails
+
+            ],
+            crosshair: true
+        },
+
+        tooltip: {
+            pointFormat: '{series.name}'
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            },
+            series: {
+                pointWidth: 30
+            }
+        },
+        series: [{
+            name: validationMsg.Total+":"+Total,
+            data: [Total]
+        }, {
+            name: validationMsg.Success +":"+SuccessTxn,
+            data: [SuccessTxn],
+        }, {
+            name: validationMsg.Decalined+":"+ TotalDeclainedTxn,
+            data: [TotalDeclainedTxn],
+        }],
+
+    });
+
+
+    var admintotal = +{{.admincount }};
+    var merchantTotal = +{{.merchantcount }};
+    Highcharts.chart('pie-Chart', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        tooltip: {
+            pointFormat: '{series.name1}'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                showInLegend: true
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: validationMsg.UserDetails,
+            data: [
+                [validationMsg.AdminUsers +":"+ admintotal, admintotal],
+                [validationMsg.MerchantUsers +":"+ merchantTotal, merchantTotal]
+
+            ]
+        }]
+
+    });
+});
+</script>
+{{end}}

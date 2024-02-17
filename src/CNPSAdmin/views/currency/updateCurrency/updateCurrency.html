@@ -1,0 +1,79 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.Currency}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchCurrency.Get"}}'>{{.SysConfig}}</a></li>
+             <li class="breadcrumb-item"><a href='{{urlfor "SearchCurrency.Get"}}'>{{.Currency}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.UpdateCurrency}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+     {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}  
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">{{.Update}}
+                <a id="backButton" class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "ViewCurrency.Get" ":currency" .Code}}'> {{.Back}}</a></h6>
+            <hr />
+            <form class="needs-validation" id="currencyForm" action='{{urlfor "UpdateCurrency.Post" ":currency" .Code}}' method="post" novalidate="" autocomplete="off">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_code">{{.Codes}}</label>
+                        <input type="text" class="form-control" value="{{.Code}}" name="input_code" id="input_code" maxlength="30" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_symbol">{{.Symbols}}</label>
+                        <input type="text" class="form-control" name="input_symbol" id="input_symbol" value="{{.Symbol}}" maxlength="30" required>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_country">{{.Countrys}}</label>
+                        <input type="text" class="form-control" value="{{.Country}}" name="input_country" id="input_country" maxlength="30" required onkeypress="return blockSpecialCharwithNumber(event)">
+                        <div class="valid-feedback"> </div>
+                    </div>
+                </div>
+               
+                <div class="form-row">
+                    
+                    <div class="col-md-4 mb-3">
+                        <label for="input_status">{{.Statuss}}</label>
+                        <select class="form-control select2" style="width: 100%;" id="input_status" name="input_status" required>
+                            <option value="" {{if eq .Status ""}} selected{{end}}>{{.please_select}}</option>
+                            <option value="ACTIVE" {{if eq .Status "ACTIVE"}} selected{{end}}>ACTIVE</option>
+                            <option value="INACTIVE" {{if eq .Status "INACTIVE"}} selected{{end}}>INACTIVE</option>
+                        </select>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-row">
+                    <div class="col-md-12 text-center">
+                        <input name="btnsubmit" id="submitBtn" type="submit" class="btn btn-primary" value="{{.Submit}}">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

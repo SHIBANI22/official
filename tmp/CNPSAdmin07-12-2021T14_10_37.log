@@ -1,0 +1,183 @@
+./startup.sh: line 30: CNPSAdmin: command not found
+./startup.sh: line 30: CNPSAdmin: command not found
+./startup.sh: line 30: CNPSAdmin: command not found
+./startup.sh: line 30: CNPSAdmin: command not found
+./startup.sh: line 29: CNPSAdmin: command not found
+./startup.sh: line 29: CNPSAdmin: command not found
+./startup.sh: line 29: CNPSAdmin: command not found
+./startup.sh: line 29: CNPSAdmin: command not found
+./startup.sh: line 29: CNPSAdmin: command not found
+2021/12/07 13:17:29 Debug Info Trying to connect DB
+2021/12/07 13:17:29 Debug Info DB Connected successfully
+2021/12/07 13:17:29 Debug Info Trying to connect Recon DB
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x20 pc=0x8ad6ad]
+
+goroutine 1 [running]:
+database/sql.(*DB).SetConnMaxLifetime(0x0, 0x45d964b800)
+	/usr/local/go/src/database/sql/sql.go:952 +0x2d
+CNPSAdmin/model/recondb.Init(0x0, 0x0)
+	/home/shivakumar/Desktop/supernet/projects/CNPS/Pro/Dev/cnpsadminnew-template/src/CNPSAdmin/model/recondb/recondb.go:26 +0x325
+CNPSAdmin/routers.init.0()
+	/home/shivakumar/Desktop/supernet/projects/CNPS/Pro/Dev/cnpsadminnew-template/src/CNPSAdmin/routers/routers.go:68 +0x5b
+2021/12/07 13:21:38 Debug Info Trying to connect DB
+2021/12/07 13:21:38 Debug Info DB Connected successfully
+2021/12/07 13:21:38 Debug Info Trying to connect Recon DB
+panic: runtime error: invalid memory address or nil pointer dereference
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x20 pc=0x8ad6ad]
+
+goroutine 1 [running]:
+database/sql.(*DB).SetConnMaxLifetime(0x0, 0x45d964b800)
+	/usr/local/go/src/database/sql/sql.go:952 +0x2d
+CNPSAdmin/model/recondb.Init(0x0, 0x0)
+	/home/shivakumar/Desktop/supernet/projects/CNPS/Pro/Dev/cnpsadminnew-template/src/CNPSAdmin/model/recondb/recondb.go:26 +0x325
+CNPSAdmin/routers.init.0()
+	/home/shivakumar/Desktop/supernet/projects/CNPS/Pro/Dev/cnpsadminnew-template/src/CNPSAdmin/routers/routers.go:68 +0x5b
+2021/12/07 13:23:23 Debug Info Trying to connect DB
+2021/12/07 13:23:23 Debug Info DB Connected successfully
+2021/12/07 13:23:23 Debug Info Trying to connect Recon DB
+2021/12/07 13:23:23 Debug Info Recon DB Connected successfully
+2021/12/07 13:23:24.042 [1;34m[I][0m [asm_amd64.s:1371]  http server Running on http://:5007
+[Debug] : 2021-12-07T09:53:45 -> [Client IP -  ::1]
+2021/12/07 13:23:45.123 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|   4.958862ms|   match|[97;44m GET     [0m /     r:/
+2021/12/07 13:23:45.172 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|   1.897484ms|   match|[97;44m GET     [0m /static/vendors/bundle.css
+2021/12/07 13:23:45.188 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|   2.519026ms|   match|[97;44m GET     [0m /static/assets/css/app.min.css
+2021/12/07 13:23:45.194 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|    458.585µs|   match|[97;44m GET     [0m /static/vendors/select2/css/select2.min.css
+2021/12/07 13:23:45.195 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|    871.757µs|   match|[97;44m GET     [0m /static/assets/css/custom.css
+2021/12/07 13:23:45.196 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|    628.341µs|   match|[97;44m GET     [0m /static/assets/css/duDialog.css
+2021/12/07 13:23:45.201 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|   5.155062ms|   match|[97;44m GET     [0m /static/vendors/bundle.js
+2021/12/07 13:23:45.201 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|   1.388562ms|   match|[97;44m GET     [0m /static/assets/js/validation.js
+2021/12/07 13:23:45.202 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|   5.652387ms|   match|[97;44m GET     [0m /static/assets/js/app.min.js
+2021/12/07 13:23:45.203 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|   4.213959ms|   match|[97;44m GET     [0m /static/assets/js/jquery.validate.min.js
+2021/12/07 13:23:45.203 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|    2.94452ms|   match|[97;44m GET     [0m /static/vendors/PACE/pace.min.js
+2021/12/07 13:23:45.204 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|   3.442958ms|   match|[97;44m GET     [0m /static/assets/js/duDialog.js
+2021/12/07 13:23:45.210 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|   1.001994ms|   match|[97;44m GET     [0m /static/vendors/select2/js/select2.min.js
+2021/12/07 13:23:45.211 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|    625.746µs|   match|[97;44m GET     [0m /static/assets/js/custom.js
+2021/12/07 13:23:45.215 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|    610.828µs|   match|[97;44m GET     [0m /static/assets/media/image/login-logo.png
+2021/12/07 13:23:45.606 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|   2.293167ms|   match|[97;44m GET     [0m /static/assets/media/image/login.png
+2021/12/07 13:23:45.802 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|   7.484406ms|   match|[97;44m GET     [0m /static/assets/media/image/favicon.png
+[Info] : 2021-12-07T09:53:58 -> [Recon Reports Page Start]
+[Info] : 2021-12-07T09:53:58 -> [Session ID -  ff927a9b6c40b16690ae3b5d2c557b7f]
+[Error] : 2021-12-07T09:53:58 -> [Session Expire]
+[Error] : 2021-12-07T09:53:58 -> [Session Time Out.Please Logout and Login Again.]
+[Info] : 2021-12-07T09:53:58 -> [Redirecting to login]
+[Info] : 2021-12-07T09:53:58 -> [Reports Page Fail]
+2021/12/07 13:23:58.408 [1;44m[D][0m [server.go:2887]  |            ::1|[90;47m 302 [0m|   7.139237ms|   match|[97;44m GET     [0m /Report/TransactionReconReport   r:/Report/TransactionReconReport
+[Debug] : 2021-12-07T09:53:58 -> [Client IP -  ::1]
+2021/12/07 13:23:58.441 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|    3.78534ms|   match|[97;44m GET     [0m /Login   r:/Login
+[Info] : 2021-12-07T09:54:02 -> [Login Start]
+[Debug] : 2021-12-07T09:54:02 -> [Client IP -  ::1]
+[Debug] : 2021-12-07T09:54:02 -> [Session ID -  da896dd2c85eb7ccaed0501df43c4ee8]
+[Debug] : 2021-12-07T09:54:02 -> [Form Data -  testadmin@gmail.comEnglish]
+[Debug] : 2021-12-07T09:54:02 -> [Language -  English]
+[Info] : 2021-12-07T09:54:02 -> [User Session Found]
+[Info] : 2021-12-07T09:54:02 -> [User Session Value -  b39ea07ee374cc30dc05615361d4c32f*2021-12-06T14:18:40*2021-12-07T02:51:29*LOGGED_IN*]
+[Info] : 2021-12-07T09:54:02 -> [Status -  b39ea07ee374cc30dc05615361d4c32f]
+[Info] : 2021-12-07T09:54:02 -> [Status -  2021-12-06T14:18:40]
+[Info] : 2021-12-07T09:54:02 -> [Status -  2021-12-07T02:51:29]
+[Info] : 2021-12-07T09:54:02 -> [Status -  LOGGED_IN]
+[Info] : 2021-12-07T09:54:02 -> [User logout session set]
+[Error] : 2021-12-07T09:54:02 -> [Multiple user login not allowed.Now you have been logged out from all browsers.Please login again]
+[Debug] : 2021-12-07T09:54:02 -> [Query Data -  [[English]]  Data len -  1]
+[Debug] : 2021-12-07T09:54:02 -> [Query Data -  [[ACTIVE]]  Data len -  1]
+[Debug] : 2021-12-07T09:54:02 -> [Query Data -  [[0]]  Data len -  1]
+[Debug] : 2021-12-07T09:54:02 -> [Query Data -  [[hknktktj7RwioWwMyp8i7bZlxdFEOxrmkdLT0pzM8XokbK9eEBa9rgjrRWcIg0/9 testadmin@gmail.com 1 ADMIN IT English YES 1 THIERRY FABRICE BAHI ROOT]] 
+Data len -  1]
+[Debug] : 2021-12-07T09:54:02 -> [role -  ADMIN]
+[Debug] : 2021-12-07T09:54:02 -> [Row Data -  0xc0000fee00]
+[Debug] : 2021-12-07T09:54:02 -> [Query Data -  [[1 ROOT [{"identity":"Dashboard","status":"true"},{"identity":"SystemConfiguration","status":"true"},{"identity":"UpdateSwitchStatus","status":"true"},{"identity":"ViewSwitchStatus","status":"true"},{"status":"true"},{"identity":"UpdateChannels","status":"true"},{"identity":"ViewChannels","status":"true"},{"identity":"ProfileManagment","status":"true"},{"status":"true"},{"identity":"Createrole","status":"true"},{"identity":"Updaterole","status":"true"},{"identity":"Viewrole","status":"true"},{"status":"true"},{"identity":"Updateprivileges","status":"true"},{"identity":"Viewprivileges","status":"true"},{"identity":"Users","status":"true"},{"identity":"CreateUser","status":"true"},{"identity":"UpdateUser","status":"true"},{"identity":"ViewUser","status":"true"},{"identity":"Reporting","status":"true"},{"identity":"TransactionReport","status":"true"},{"identity": "TransactionReconReport","status": "true"},{"identity":"ManualTransactionLabel","status":"true"},{"identity":"TransactionProcessing","status":"true"},{"identity":"Reports","status":"true"},{"identity":"AuditReport","status":"true"},{"identity":"ChannelReport","status":"true"},{"identity":"DebugLogReport","status":"true"},{"identity":"AnalyticsMenu","status":"true"},{"identity":"Analytics","status":"true"}]]] 
+Data len -  1]
+[Info] : 2021-12-07T09:54:02 -> [UserName -  testadmin@gmail.com]
+[Info] : 2021-12-07T09:54:02 -> [Session ID -  da896dd2c85eb7ccaed0501df43c4ee8]
+[Info] : 2021-12-07T09:54:02 -> [User Session Found]
+[Info] : 2021-12-07T09:54:02 -> [User Session Value -  b39ea07ee374cc30dc05615361d4c32f*2021-12-06T14:18:40*2021-12-07T02:51:29*LOGGED_OUT*2021-12-07T09:54:02]
+[Info] : 2021-12-07T09:54:02 -> [New User Session Value -  da896dd2c85eb7ccaed0501df43c4ee8*2021-12-07T02:51:29*2021-12-07T09:54:02*LOGGED_IN*]
+[Debug] : 2021-12-07T09:54:02 -> [firstlogin -  YES]
+[Debug] : 2021-12-07T09:54:02 -> [Host Data -  localhost]
+[Debug] : 2021-12-07T09:54:02 -> [URL Data -  /Login]
+[Debug] : 2021-12-07T09:54:02 -> [User Data -  testadmin@gmail.com]
+[Debug] : 2021-12-07T09:54:02 -> [method Data -  POST]
+[Info] : 2021-12-07T09:54:02 -> [Login Success]
+2021/12/07 13:24:02.130 [1;44m[D][0m [server.go:2887]  |            ::1|[90;47m 302 [0m|  43.925722ms|   match|[97;46m POST    [0m /Login   r:/Login
+[Info] : 2021-12-07T09:54:02 -> [Dashboard Page Start]
+[Debug] : 2021-12-07T09:54:02 -> [Client IP -  ::1]
+[Info] : 2021-12-07T09:54:02 -> [Session ID -  da896dd2c85eb7ccaed0501df43c4ee8]
+[Info] : 2021-12-07T09:54:02 -> [UserName -  testadmin@gmail.com]
+[Info] : 2021-12-07T09:54:02 -> [User Session Found]
+[Info] : 2021-12-07T09:54:02 -> [User Session Status -  LOGGED_IN]
+[Info] : 2021-12-07T09:54:02 -> [User Session Good]
+[Debug] : 2021-12-07T09:54:02 -> [IsAuthorized -  Authorized]
+[Debug] : 2021-12-07T09:54:02 -> [UserName -  testadmin@gmail.com]
+[Debug] : 2021-12-07T09:54:02 -> [Role -  ADMIN]
+[Debug] : 2021-12-07T09:54:02 -> [Session ID -  da896dd2c85eb7ccaed0501df43c4ee8]
+[Debug] : 2021-12-07T09:54:02 -> [Row Data -  0xc0000ff380]
+[Debug] : 2021-12-07T09:54:02 -> [Query Data -  [[1 0]] 
+Data len -  1]
+[Debug] : 2021-12-07T09:54:02 -> [Query Data1 -  1]
+[Debug] : 2021-12-07T09:54:02 -> [Query Data2 -  0]
+[Debug] : 2021-12-07T09:54:02 -> [Row Data -  0xc0000ff400]
+[Debug] : 2021-12-07T09:54:02 -> [Query Data -  [[0  0  0  0  0 ]] 
+Data len -  1]
+[Debug] : 2021-12-07T09:54:02 -> [Query Data1 -  0]
+[Debug] : 2021-12-07T09:54:02 -> [Query Data2 -  ]
+[Debug] : 2021-12-07T09:54:02 -> [Host Data -  localhost]
+[Debug] : 2021-12-07T09:54:02 -> [URL Data -  /Dashboard]
+[Debug] : 2021-12-07T09:54:02 -> [User Data -  testadmin@gmail.com]
+[Debug] : 2021-12-07T09:54:02 -> [method Data -  GET]
+[Info] : 2021-12-07T09:54:02 -> [Dashboard Page Success]
+2021/12/07 13:24:02.146 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|  13.288069ms|   match|[97;44m GET     [0m /Dashboard   r:/Dashboard
+[Info] : 2021-12-07T09:54:06 -> [Reports Page Start]
+[Info] : 2021-12-07T09:54:06 -> [Session ID -  da896dd2c85eb7ccaed0501df43c4ee8]
+[Info] : 2021-12-07T09:54:06 -> [UserName -  testadmin@gmail.com]
+[Info] : 2021-12-07T09:54:06 -> [User Session Found]
+[Info] : 2021-12-07T09:54:06 -> [User Session Status -  LOGGED_IN]
+[Info] : 2021-12-07T09:54:06 -> [User Session Good]
+[Debug] : 2021-12-07T09:54:06 -> [IsAuthorized -  Authorized]
+[Debug] : 2021-12-07T09:54:06 -> [Host Data -  localhost]
+[Debug] : 2021-12-07T09:54:06 -> [URL Data -  /Report/TransactionReport]
+[Debug] : 2021-12-07T09:54:06 -> [User Data -  testadmin@gmail.com]
+[Debug] : 2021-12-07T09:54:06 -> [method Data -  GET]
+[Info] : 2021-12-07T09:54:06 -> [Reports Page Success]
+2021/12/07 13:24:06.510 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|  20.567588ms|   match|[97;44m GET     [0m /Report/TransactionReport   r:/Report/TransactionReport
+[Info] : 2021-12-07T09:54:07 -> [SearchOrder Page Start]
+[Debug] : 2021-12-07T09:54:07 -> [Client IP -  ::1]
+[Info] : 2021-12-07T09:54:07 -> [Session ID -  da896dd2c85eb7ccaed0501df43c4ee8]
+[Info] : 2021-12-07T09:54:07 -> [UserName -  testadmin@gmail.com]
+[Info] : 2021-12-07T09:54:07 -> [User Session Found]
+[Info] : 2021-12-07T09:54:07 -> [User Session Status -  LOGGED_IN]
+[Info] : 2021-12-07T09:54:07 -> [User Session Good]
+[Debug] : 2021-12-07T09:54:07 -> [IsAuthorized -  Authorized]
+[Debug] : 2021-12-07T09:54:07 -> [2021/10/01 - 2021/12/07]
+[Debug] : 2021-12-07T09:54:07 -> [2021-10-01 2021-12-07]
+[Info] : 2021-12-07T09:54:07 -> [Final Query select cnps_txn_number, JSON_UNQUOTE(JSON_EXTRACT(transaction_deatils, '$.Transaction_start_date')), pg_txn_number, transaction_time, bank_txn_number, JSON_UNQUOTE(JSON_EXTRACT(transaction_deatils, '$.BankTransactionDate')), entity_id, entity_name, JSON_UNQUOTE(JSON_EXTRACT(transaction_deatils, '$.Declaration_type')), operator, channel, amount, status FROM Transactions WHERE cnps_txn_number IS NOT NULL AND (DATE (transaction_time) >= DATE(?)) AND (DATE (transaction_time) <= DATE(?)) ORDER BY cnps_txn_number desc LIMIT ?,? [2021-10-01 2021-12-07 0 10]]
+[Debug] : 2021-12-07T09:54:07 -> [Host Data -  localhost]
+[Debug] : 2021-12-07T09:54:07 -> [URL Data -  /Report/TransactionReport]
+[Debug] : 2021-12-07T09:54:07 -> [User Data -  testadmin@gmail.com]
+[Debug] : 2021-12-07T09:54:07 -> [method Data -  POST]
+2021/12/07 13:24:07.043 [1;44m[D][0m [server.go:2887]  |            ::1|[97;42m 200 [0m|  36.644194ms|   match|[97;46m POST    [0m /Report/TransactionReport   r:/Report/TransactionReport
+[Info] : 2021-12-07T09:54:09 -> [Recon Reports Page Start]
+[Info] : 2021-12-07T09:54:09 -> [Session ID -  da896dd2c85eb7ccaed0501df43c4ee8]
+[Info] : 2021-12-07T09:54:09 -> [UserName -  testadmin@gmail.com]
+[Info] : 2021-12-07T09:54:09 -> [User Session Found]
+[Info] : 2021-12-07T09:54:09 -> [User Session Status -  LOGGED_IN]
+[Info] : 2021-12-07T09:54:09 -> [User Session Good]
+[Debug] : 2021-12-07T09:54:09 -> [IsAuthorized -  Authorized]
+[Debug] : 2021-12-07T09:54:09 -> [Host Data -  localhost]
+[Debug] : 2021-12-07T09:54:09 -> [URL Data -  /Report/TransactionReconReport]
+[Debug] : 2021-12-07T09:54:09 -> [User Data -  testadmin@gmail.com]
+[Debug] : 2021-12-07T09:54:09 -> [method Data -  GET]
+[Info] : 2021-12-07T09:54:09 -> [Reports Page Success]
+2021/12/07 13:24:09.138 [1;35m[C][0m [panic.go:965]  the request url is  /Report/TransactionReconReport
+2021/12/07 13:24:09.139 [1;35m[C][0m [panic.go:965]  Handler crashed with error can't find templatefile in the path:views/reports/transactionReconReport/transactionReconReport.html
+2021/12/07 13:24:09.139 [1;35m[C][0m [panic.go:965]  /usr/local/go/src/runtime/panic.go:965
+2021/12/07 13:24:09.139 [1;35m[C][0m [panic.go:965]  /home/shivakumar/Desktop/supernet/projects/CNPS/Pro/QA/cnpscommon/Common/src/github.com/astaxie/beego/template.go:75
+2021/12/07 13:24:09.139 [1;35m[C][0m [panic.go:965]  /home/shivakumar/Desktop/supernet/projects/CNPS/Pro/QA/cnpscommon/Common/src/github.com/astaxie/beego/controller.go:306
+2021/12/07 13:24:09.139 [1;35m[C][0m [panic.go:965]  /home/shivakumar/Desktop/supernet/projects/CNPS/Pro/QA/cnpscommon/Common/src/github.com/astaxie/beego/controller.go:257
+2021/12/07 13:24:09.139 [1;35m[C][0m [panic.go:965]  /home/shivakumar/Desktop/supernet/projects/CNPS/Pro/QA/cnpscommon/Common/src/github.com/astaxie/beego/controller.go:237
+2021/12/07 13:24:09.139 [1;35m[C][0m [panic.go:965]  /home/shivakumar/Desktop/supernet/projects/CNPS/Pro/QA/cnpscommon/Common/src/github.com/astaxie/beego/router.go:865
+2021/12/07 13:24:09.139 [1;35m[C][0m [panic.go:965]  /usr/local/go/src/net/http/server.go:2887
+2021/12/07 13:24:09.139 [1;35m[C][0m [panic.go:965]  /usr/local/go/src/net/http/server.go:1952
+2021/12/07 13:24:09.139 [1;35m[C][0m [panic.go:965]  /usr/local/go/src/runtime/asm_amd64.s:1371
+2021/12/07 13:24:09.139 [server.go:3137]  [HTTP] http: superfluous response.WriteHeader call from github.com/astaxie/beego/context.(*Response).WriteHeader (context.go:230)
+2021/12/07 13:24:09 Debug Debug 404 Path /favicon.ico
+2021/12/07 13:24:09.171 [1;44m[D][0m [server.go:2887]  |            ::1|[97;43m 404 [0m|   1.178013ms| nomatch|[97;44m GET     [0m /favicon.ico

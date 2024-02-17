@@ -1,0 +1,183 @@
+{{template "themes/adminTemplate.html" .}} {{define "AdditionalStyles"}} {{end}} {{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.TxnDetals}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "TransactionReport.Get"}}'>{{.Reporting}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "TransactionReport.Get"}}'>{{.TxnDetals}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.List}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}} {{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="">
+                    <div class="accordion custom-accordion">
+                        <div class="accordion-row open">
+                            <a href="#" class="accordion-header">
+                                <h6 class="card-title">{{.SearchFilters}}</h6>
+                                <i class="accordion-status-icon close fa fa-plus"></i>
+                                <i class="accordion-status-icon open fa fa-minus"></i>
+                            </a>
+                            <div class="accordion-body">
+                                <form class="" id="search_form" action='' method="post" novalidate="" autocomplete="off">
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_cnpstxnnumnber">{{.CNPSTransactionNumber}}</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder={{.enterTXN}} name="input_cnpstxnnumnber" id="input_cnpstxnnumnber" />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_pgtxnnumnber">{{.PGTransactionNumber}}</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder={{.input_pgtxnnumnber}} name="input_pgtxnnumnber" id="input_pgtxnnumnber" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0' />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_entityid">{{.MerchantID}}</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder={{.input_entityid}} name="input_entityid" id="input_entityid" onkeypress="return blockDisabledChar(event)" />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_entityname">{{.MerchantName}}</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder={{.input_entityname}} name="input_entityname" id="input_entityname" onkeypress="return blockSpecialChar(event)" />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_bank">{{.Bank}}</label>
+                                            <select class="form-control select2" id="input_bank" name="input_bank">
+                                                <option value="" id="please_select">{{.please_select}}</option>
+                                                <option value="ECOBANK">ECOBANK</option>
+                                                <option value="UBABANK">UBABANK</option>
+                                                <option value="MTN">MTN</option>
+                                                <option value="ORANGE">ORANGE</option>
+                                                <option value="SGCI">SGCI</option>
+                                                <option value="BNIBANK">BNIBANK</option>
+                                                <option value="BACIBANK">BACIBANK</option>
+                                                <option value="BOABANK">BOABANK</option>
+                                                <option value="NSIABANK">NSIABANK</option>
+                                                <option value="VERSUSBANK">VERSUSBANK</option>
+                                                <option value="BHCIBANK">BHCIBANK</option>
+                                                <option value="BGFIBANK">BGFIBANK</option>
+                                                <option value="SIBBANK">SIB</option>
+                                                <option value="BSICBANK">BSICBANK</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_channel">{{.Channel}}</label>
+                                            <select class="form-control select2" style="width: 100%;" id="input_channel" name="input_channel">
+                                                <option value="" id="please_select">{{.please_select}}</option>
+                                                <option value="CARD">CARD</option>
+                                                <option value="BILLMAP">BILLMAP</option>
+                                                <option value="DIRECTDEBIT">DIRECTDEBIT</option>
+                                                <option value="QRCODE">QRCODE</option>
+                                                <option value="OMINIPAY">OMINIPAY</option>
+                                                <option value="BANKCOLLECT">BANKCOLLECT</option>
+                                                <option value="BANKTRANSFER">BANKTRANSFER</option>
+                                                <option value="ORANGEMONEY">ORANGEMONEY</option>
+                                                <option value="MOBILEPAY">MOBILEPAY</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_amount">{{.Amount}}</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder={{.input_amount}} name="input_amount" id="input_amount" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0' />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="daterange">{{.PGTxnDate}}</label>
+                                            <div class="input-group">
+                                                <input type="text" name="daterange" id="daterange" placeholder="{{.PGTxnDate}}" class="form-control simple-date-range-picker" readonly>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroupPrepend3"> <i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_status">{{.Status}}</label>
+                                            <select class="form-control select2" id="input_status" name="input_status">
+                                                <option value="" id="please_select">{{.please_select}}</option>
+                                                <option value="APPROVED" id="Approved">{{.Approved}}</option>
+                                                <option value="DECLINED" id="Declined">{{.Declined}}</option>
+                                                <option value="PENDING" id="Pending">{{.Pending}}</option>
+                                                <option value="INITIATED" id="Initiated">{{.Initiated}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_status">{{.DeclarationTypeLabel}}</label>
+                                            <select class="form-control select2" id="input_declaration_type" name="input_declaration_type" data-placeholder="select">
+                                                <option value="" id="please_select">{{.please_select}}</option>
+                                                <option value="ALL">{{.DeclarationTypeAllLabel}}</option>
+                                                <option value="CNPS" id="cnps">CNPS</option>
+                                                <option value="CNAM" id="cnam">CNAM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="form-row">
+                                        <div class="col-md-12 text-center">
+                                            <button name="btnsubmit" type="button" id="Search" class="btn btn-primary">{{.GetRecords}}</button>
+                                            <button name="btnreset" type="button" id="Reset" class="btn btn-warning">{{.Reset}}</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{.List}}
+                    </h6>
+                    <hr />
+                    <div class="box-body table-responsive">
+                        <table id="listTable" class="listTable table-bordered table-striped tableListname" data-document-title='{{if eq .language "English"}}Transaction Reports{{else}}Détails Transaction{{end}}' data-url='{{urlfor "TransactionReport.Post"}}' data-orderby="desc"
+                            orderby-column="3" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th id="CNPSTransactionNumber">{{.CNPSTransactionNumber}}</th>
+                                    <th id="CNPSTxnDate">{{.CNPSTxnDate}}</th>
+                                    <th id="PGTransactionNumber">{{.PGTransactionNumber}}</th>
+                                    <th id="PGTxnDate">{{.PGTxnDate}}</th>
+                                    <th id="BANKTransactionNumber">{{.BANKTransactionNumber}}</th>
+                                    <th id="BankTxnDate">{{.BankTxnDate}}</th>
+                                    <th id="MerchantID">{{.MerchantID}}</th>
+                                    <th id="MerchantName">{{.MerchantName}}</th>
+                                    <th id="DeclarationType">{{.DeclarationTypeLabel}}</th>
+                                    <th id="Bank">{{.Bank}}</th>
+                                    <th id="Channel">{{.Channel}}</th>
+                                    <th id="Amount" class="no-wrap">{{.Amount}}</th>
+                                    <th id="Status1">{{.Status}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}} {{define "AdditionalScripts"}} {{template "default/menuPrivilege.html" .}} {{end}}

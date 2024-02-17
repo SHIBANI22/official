@@ -1,0 +1,134 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.Channels}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchChannel.Get"}}'>{{.SysConfig}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchChannel.Get"}}'>{{.Channels}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.Update}}</a></li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+
+<body onload="myFunction()">
+    <main class="main-content">
+        {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+        <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+            <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="ti-close"></i>
+            </button>
+        </div>
+        {{end}}
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">{{.Update}}
+                    <a id="backButton" class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "ViewChannel.Get" ":AdminID" .AdminID}}'> {{.Back}}</a></h6>
+                <hr />
+                <form class="needs-validation" id="UpdateChannelForm" action='{{urlfor "UpdateChannel.Post" ":AdminID" .AdminID}}' method="post" novalidate="" autocomplete="off">
+                    <div class="form-row">
+                        <div class="row" hidden="">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Gateway ID</label>
+                                    <input type="text" class="form-control" name="gateway_id" id="gateway_id" value="{{.GatewayID}}" readonly />
+                                    <input type="text" class="form-control" name="channel_id" id="channel_id" value="{{.AdminID}}" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-4 mb-3">
+                        <label for="input_user_first_name">Gateway ID</label>
+                        <input type="text" class="form-control" value="{{.GatewayID}}" name="gateway_id" id="gateway_id" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)">
+                        <div class="valid-feedback"> </div>
+                    </div> -->
+                        <div class="col-md-4 mb-3">
+                            <label for="ChannelNamee">{{.ChannelNamee}}</label>
+                            <input type="text" class="form-control" name="channel_name" id="channel_name" value="{{.ChannelName}}" readonly maxlength="30" oncopy="return false" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)">
+                            <div class="valid-feedback"> </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="GatewayNamee">{{.GatewayNamee}}</label>
+                            <input type="text" class="form-control" value="{{.GatewayName}}" name="gateway_name" id="gateway_name" readonly maxlength="30" oncopy="return false" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)">
+                            <div class="valid-feedback"> </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="GatewayImagee"> {{.GatewayImagee}}</label>
+                            <input type="text" class="form-control" name="gateway_image" oncopy="return false" onpaste="return false" id="gateway_image" value="{{.GatewayImage}}" readonly />
+                            <div class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="ChannelImagee">{{.ChannelImagee}}</label>
+                            <input type="text" class="form-control" value="{{.ChannelImage}}" name="channel_image" id="channel_image" readonly>
+                            <div class="valid-feedback"></div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="Descc">{{.Descc}}</label>
+                            <input type="text" class="form-control" name="channel_desc" id="channel_desc" readonly>
+                            <div class="valid-feedback"></div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="GatewayStatuss">{{.GatewayStatuss}}</label>
+                            <select class="form-control select2" style="width: 100%;" id="input_gateway_status" name="input_gateway_status" required>
+                                <option value="">{{.pleaseselectPlaceholder}}</option>
+                                <option value="ACTIVE" {{if eq .GatewayStatus "ACTIVE"}} selected{{end}}>{{.Active}}</option>
+                                <option value="INACTIVE" {{if eq .GatewayStatus "INACTIVE"}} selected{{end}}>{{.InActive}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="ChannelStatuss">{{.ChannelStatuss}}</label>
+                            <select class="form-control select2" style="width: 100%;" id="input_channel_status" name="input_channel_status" required>
+                                <option value="">{{.pleaseselectPlaceholder}}</option>
+                                <option value="ACTIVE" {{if eq .ChannelStatus "ACTIVE"}} selected{{end}}>{{.Active}}</option>
+                                <option value="INACTIVE" {{if eq .ChannelStatus "INACTIVE"}} selected{{end}}>{{.InActive}}</option>
+                            </select>
+                        </div>
+                        <div id="myDIV" class="col-md-4 mb-3">
+                            <label for="Token">UBA Token Number</label>
+                            <input type="text" class="form-control" name="input_tokennumber" id="input_tokennumber" maxlength="12" required>
+                            <div class="valid-feedback"></div>
+                        </div>
+                        <div id="myDIV" class="col-md-4 mb-3">
+                            <span>{{.ubares}}</span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-row">
+                        <div class="col-md-12 text-center">
+                            <button name="btnsubmit" id="submitBtn" type="submit" class="btn btn-primary">{{.Submit}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+<script>
+function myFunction() {
+    var x1 = {{.UBA }};
+    var x = document.getElementById("myDIV");
+    if (x1 === "TRUE") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+
+}
+</script>
+{{template "default/menuPrivilege.html" .}}
+{{end}}

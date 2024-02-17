@@ -1,0 +1,76 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.Currency}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchCurrency.Get"}}'>{{.SysConfig}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchCurrency.Get"}}'>{{.Currency}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.AddCurrency}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">{{.AddCurrency}}
+                <a id="CreateCurrencyMenu" class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "SearchCurrency.Get"}}'> {{.Back}}</a></h6>
+            <hr />
+            <form class="needs-validation" id="currencyForm" action='{{urlfor "CreatCurrency.Post"}}' method="post" novalidate="" autocomplete="off">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_code">{{.Code}}</label>
+                        <input type="text" class="form-control" placeholder="{{.Code}}" name="input_code" id="input_code" maxlength="30" required>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_symbol">{{.Symbol}}</label>
+                        <input type="text" class="form-control" placeholder="{{.Symbol}}" name="input_symbol" id="input_symbol" maxlength="30" required>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_country">{{.Country}}</label>
+                        <input type="text" class="form-control" placeholder="{{.Country}}" name="input_country" id="input_country" maxlength="30" required>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_code">Exhange Rates(1 {{.BaseCurrency}} = ?)</label>
+                        <input type="text" class="form-control" placeholder="Exhange Rates" name="input_exhange_rates" id="input_exhange_rates" maxlength="15" required>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                </div>
+                                              
+                <hr />
+                <div class="form-row">
+                    <div class="col-md-12 text-center">
+                        <button name="btnsubmit" id="submitBtn" type="submit" class="btn btn-primary">{{.Submit}}</button>
+                        <a href='{{urlfor "SearchCurrency.Get"}}' type="button" class="btn btn-warning" id="cancel">{{.Cancel}}</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

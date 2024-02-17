@@ -1,0 +1,88 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.Users}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchUser.Get"}}'>{{.ProfileManagement}}</a></li>
+             <li class="breadcrumb-item"><a href='{{urlfor "SearchUser.Get"}}'>{{.Users}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.View}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}} 
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">{{.View}}
+                <div class="pull-right">
+                    <a id="UpdateUserMenu" class="btn btn-danger dangerbtn-height" href='{{urlfor "UpdateUser.Get" ":AdminID" .Id}}'><i class="fa fa-edit"></i> {{.Updateuser}}</a>
+                    <a id="backButton" class="btn btn-danger dangerbtn-height" href='{{urlfor "SearchUser.Get"}}'> {{.Back}}</a>
+                </div>
+            </h6>
+            <hr />
+            <form class="needs-validation" id="createUser" action='{{urlfor "CreateUser.Post"}}' method="post" novalidate="">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_first_name">{{.FirstName}}</label>
+                        <input type="text" class="form-control" name="input_user_first_name" id="input_user_first_name" value="{{.UserFirstName}}" readonly oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_middele_name">{{.MiddleName}}</label> <input type="text" class="form-control" name="input_user_middele_name" id="input_user_middele_name" value="{{.UserMiddleName}}" readonly oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label id="input_user_last_name">{{.LastName}}</label> <input type="text" class="form-control" name="input_user_last_name" id="input_user_last_name" value="{{.UserLastName}}" readonly oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_mobile">{{.Mobile}}</label> <input type="text" class="form-control" name="input_user_mobile" id="input_user_mobile" value="{{.UserMobile}}" readonly />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_email_id"> {{.Email}}</label> <input type="text" class="form-control" name="input_user_email_id" id="input_user_email_id" value="{{.UserEmail}}" readonly />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="admin_createdate">{{.EmployeeId}}</label> <input type="text" class="form-control" name="admin_createdate" id="admin_createdate" value="{{.UserEmployeeID}}" readonly oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_role">{{.Role}}</label> <input type="text" class="form-control" name="input_user_role" id="input_user_role" value="{{.UserRole}}" readonly />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_contact_number">{{.ContectNumber}}</label> <input type="text" class="form-control" name="input_user_contact_number" id="input_user_contact_number" value="{{.UserContactNumber}}" readonly />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_department">{{.Department}}</label> <input type="text" class="form-control" name="input_user_department" id="input_user_department" value="{{.UserDepartment}}" readonly oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_language">{{.Language}}</label> <input type="text" class="form-control" name="input_user_language" id="input_user_language" value="{{.UserLanguage}}" readonly />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_status">{{.Status}}</label> <input type="text" class="form-control" name="input_user_status" id="input_user_status" value="{{.UserStatus}}" readonly />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="admin_status">{{.CreatedDate}}</label>
+                        <input type="text" class="form-control" name="admin_status" id="admin_status" value="{{.UserCreateDate}}" readonly />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

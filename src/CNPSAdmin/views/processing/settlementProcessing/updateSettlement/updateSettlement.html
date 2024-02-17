@@ -1,0 +1,116 @@
+{{template "themes/adminTemplate.html" .}} {{define "AdditionalStyles"}} {{end}} {{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.UpdateTransaction}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='javascript:void(0)'>{{.UpdateTransaction}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.Update}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}} {{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">{{.Update}}
+                <a id="backButton" class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "Searchtransaction.Get"}}'> {{.Back}}</a></h6>
+            <hr />
+            <form class="needs-validation" id="TransactionProcessing" action='{{urlfor "UpdateTransaction.Post" ":AdminID" .Id}}' method="post" novalidate="" autocomplete="off">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_cnps_txn_number">{{.CNPSTransactionNumber}}</label>
+                        <input type="text" class="form-control" value="{{.cnps_txn_number}}" name="input_cnps_txn_number" id="input_cnps_txn_number" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_cnps_txn_date">{{.CNPSTxnDate}}</label>
+                        <input type="text" class="form-control" name="input_cnps_txn_date" id="input_cnps_txn_date" value="{{.cnps_txn_date}}" maxlength="30" oncopy="return false" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)"
+                            readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_pg_txn_number">{{.PGTransactionNumber}}</label>
+                        <input type="text" class="form-control" value="{{.pg_txn_number}}" name="input_pg_txn_number" id="input_pg_txn_number" maxlength="30" oncopy="return false" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)"
+                            readonly>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_transaction_time">{{.PGTxnDate}}</label>
+                        <input type="text" class="form-control" value="{{.transaction_time}}" name="input_transaction_time" id="input_transaction_time" readonly/>
+                        <div class="valid-feedback">
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_entity_id"> {{.MerchantID}}</label>
+                        <input type="text" class="form-control" name="input_entity_id" oncopy="return false" onpaste="return false" id="input_entity_id" value="{{.entity_id}}" readonly/>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_entity_name">{{.MerchantName}}</label>
+                        <input type="text" class="form-control" value="{{.entity_name}}" name="input_entity_name" id="input_entity_name" maxlength="30" readonly>
+                        <div class="valid-feedback"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_operator">{{.Bank}}</label>
+                        <input type="text" class="form-control" value="{{.operator}}" name="input_operator" id="input_operator" maxlength="30" readonly>
+                        <div class="valid-feedback"></div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_channel">{{.Channel}}</label>
+                        <input type="text" class="form-control" name="input_channel" value="{{.channel}}" oncopy="return false" onpaste="return false" id="input_channel" autocomplete="off" readonly>
+                        <div class="valid-feedback"></div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_amount">{{.Amount}}</label>
+                        <input type="text" class="form-control" name="input_amount" id="input_amount" value="{{.amount}}" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" readonly>
+                        <div class="valid-feedback"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_bank_txn">{{.BANKTransactionNumber}}</label>
+                        <input type="text" class="form-control" name="input_bank_txn" id="input_bank_txn" value="" maxlength="30" placeholder="{{.BANKTransactionNumber}}" oncopy="return false" onpaste="return false" required>
+                        <div class="valid-feedback"></div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_txn_status">{{.Status}}</label>
+                        <select class="form-control select2" style="width: 100%;" id="input_txn_status" name="input_txn_status" required>
+                            <option value="">{{.please_select}}</option>
+                            <option value="APPROVED">APPROVED</option>
+                            <option value="DECLINED">DECLINED</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_remarks">{{.Remarks}}</label>
+                        <input type="text" class="form-control" name="input_remarks" id="input_remarks" value="" maxlength="250" placeholder="{{.Remarks}}" oncopy="return false" onpaste="return false" required>
+                        <div class="valid-feedback"></div>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-row">
+                    <div class="col-md-12 text-center">
+                        <input name="btnsubmit" id="submitBtn" type="submit" class="btn btn-primary" value="{{.Submit}}">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}} {{define "AdditionalScripts"}} {{template "default/menuPrivilege.html" .}} {{end}}

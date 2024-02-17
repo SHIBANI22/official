@@ -1,0 +1,74 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">Switch Status</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "ViewStatus.Get"}}'>{{.SystemConfiguration}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "ViewStatus.Get"}}'>{{.SwtichStatus}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.View}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{.View}}
+                        <a id="UpdateSwitchStatus" class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "Updateswtichstatus.Get"}}'> <i class="fa fa-edit"></i> {{.Modify}}</a>
+                    </h6>
+                    <hr />
+                    <form class="" action='{{urlfor "Viewswtichstatus.Post"}}' method="post" novalidate="" autocomplete="off">
+                        <div class="card">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="card-body">
+                                        <div class="row mb-3">
+                                            <div class="icon-block bg-success text-white mr-3">
+                                                <i class="ti-game mb-2 font-size-20"></i>
+                                            </div>
+                                            <div class="viewswitch" id="SwtichStatus1"><b>{{.SwtichStatus}}</b></div>
+                                            <div class="col-1"></div>
+                                            <div class="viewswitch" class="text-right" id="status">{{.Status}}</div>
+                                            {{if eq .Status "ACTIVE"}}
+                                            <div class="text-left" >
+                                                <div id="viewStatusColor" class="spinner-grow text-success" role="status"></div>
+                                            </div>
+                                            {{else}}
+                                            <div class="text-left">
+                                                <div id="viewStatusColor" class="spinner-grow text-danger" role="status"></div>
+                                            </div>
+                                            {{end}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

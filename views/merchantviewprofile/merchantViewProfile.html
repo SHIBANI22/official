@@ -1,0 +1,157 @@
+{{template "default/commonCssAndJsMerchant.html".}}
+{{define "content"}}
+	<div class="wrapper">
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1 id="MerchantViewProfile">{{.MerchantViewProfile}}</h1>
+				<ol class="breadcrumb">
+					<li><a href="/Dashboard" id="Dashboard">{{.Dashboard}}</a></li>
+					<li class="active"><a href="/Merchant/ViewProfile" id="MerchantViewProfile1">{{.MerchantViewProfile}}</a></li>
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			 <form id="merchantViewProf"  action="/Merchant/ViewProfile" method="post">
+				<section class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box box-orange effect1">
+             
+              <div class="box-header with-border">
+              
+<!--                  <button  name="btnsubmit" id="btnsubmit" style="margin-right:15px" class="btn btn-danger pull-right"><i class="fa fa-edit"></i> Update User</button>-->
+              <h3 id="GeneralInformation" class="box-title">{{.ViewUser}}</h3>
+                 </div>
+              <div class="react" style="background-color:#fff;">
+                <div class="box-body">
+                
+                <div class="row">
+                  <div class="col-md-4" hidden="">
+                    <div class="form-group">
+                      <label id="ID">{{.ID}}</label>
+                      <input type="text" class="form-control" name="admin_id" id="admin_id" value="{{.Id}}" readonly/>
+                    </div>
+                  </div>
+                  
+                    <div class="col-md-4">
+                    <div class="form-group">
+                      <label id="FirstName">{{.FirstName}}</label>
+                      <input type="text" class="form-control"  name="admin_createdate" id="admin_createdate" value="{{.UserFirstName}}" readonly/>
+                      </div>
+                  </div>
+                 <div class="col-md-4">
+                    <div class="form-group">
+                      <label id="MiddleName">{{.MiddleName}}</label>
+                      <input type="text" class="form-control" name="admin_status" id="admin_status" value="{{.UserMiddleName}}" readonly/>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label id="LastName">{{.LastName}}</label>
+                      <input type="text" class="form-control"  name="admin_createdate" id="admin_createdate" value="{{.UserLastName}}" readonly/>
+                      </div>
+                  </div>
+                 
+                  </div>
+                  <div class="row">
+                 <div class="col-md-4">
+                    <div class="form-group">
+                      <label id="Mobile">{{.Mobile}}</label>
+                      <input  type="text" class="form-control" name="admin_name" id="admin_name" value="{{.UserMobile}}" readonly/>
+                       </div>
+                  </div>
+               
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label id="Email">{{.Email}}</label>
+                      <input type="text" class="form-control" name="admin_status" id="admin_status" value="{{.UserEmail}}" readonly/>
+                    </div>
+                  </div>
+                   <div class="col-md-4">
+                    <div class="form-group">
+                      <label id="Role">{{.Role}}</label>
+                      <input type="text" class="form-control" name="admin_status" id="admin_status" value="{{.UserRole}}" readonly/>
+                    </div>
+                  </div>
+                </div>
+           
+          
+
+                <div class="row">
+                 
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label id="ContactNumber">{{.ContactNumber}}</label>
+                      <input type="text" class="form-control"  name="admin_createdate" id="admin_createdate" value="{{.UserContactNumber}}" readonly/>
+                       </div>
+                  </div>
+                    <div class="col-md-4">
+                    <div class="form-group">
+                      <label id="DepartmentName">{{.DepartmentName}}</label>
+                      <input type="text" class="form-control" name="admin_status" id="admin_status" value="{{.UserDepartment}}" readonly/>
+                    </div>
+                  </div>
+                   <div class="col-md-4">
+                    <div class="form-group">
+                      <label id="EmployeeId">{{.EmployeeId}}</label>
+                      <input type="text" class="form-control"  name="admin_createdate" id="admin_createdate" value="{{.UserEmployeeID}}" readonly/>
+                       </div>
+                  </div>
+                </div>
+ 				      <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label id="Status">{{.Status}}</label>
+                      <input type="text" class="form-control" name="admin_status" id="admin_status" value="{{.UserStatus}}" readonly/>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label id="Language">{{.Language}}</label>
+                      <input type="text" class="form-control" name="input_user" id="input_user" value="{{.UserLanguage}}" readonly/>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label" id="Language">{{.Language}}</label>
+                       <select   class="form-control" style="width: 100%;" id="input_user_language" name="input_user_language" value="{{.UserLanguage}}"  >
+                       <option value="">Please Select</option>            
+                        <option value="English">English</option>
+                        <option value="French">French</option>
+                      </select>
+                     </div>
+                  </div>
+                </div>
+ 				 </div>
+  				<div class="row">
+                  <div class="col-md-12 text-center">
+
+                  <button  name="submitBtn" id="submitBtn" style="margin-right:15px" class="btn btn-danger"><i class="fa fa-edit"></i>{{.updateUser}}</button>
+                     <a href = "/MerchantDashboard"><button type="button" name="back" value="back" class="btn btn-danger" id="cancel">{{.cancel}}</button></a>
+<!--                     <a href = "/Dashboard"><button type="button" name="back" value="back" class="btn btn-danger">Cancel</button></a>-->
+									<!--	<a href="/User/UpdateUser/{{.Id}}"><button type="button"
+												class="btn btn-danger" id="filterDataReset">Modify</button></a>-->
+
+                  </div>
+                </div>  <br><br>
+              </div>
+                </div>
+              </div>
+           </div>
+        </section>
+			</form>
+    </div>
+		</div>
+	</div>
+	<div id="footer"></div>
+ 
+	<div class="control-sidebar-bg"></div>
+<script src="../../static/resources/js/jquery.min.js"></script>
+	<script> 
+$("#submitBtn").click(function(){
+    var language ={{.language}}
+    sessionStorage.setItem("language", language);  
+    $("#merchantViewProf").submit();
+  })
+{{end}}

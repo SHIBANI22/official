@@ -1,0 +1,71 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}}
+{{end}}
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.Package}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchPackage.Get"}}'>{{.SysConfig}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchPackage.Get"}}'>{{.Package}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.AddPackage}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">{{.AddPackage}}
+                <a id="CreateUserMenu" class="btn btn-danger pull-right dangerbtn-height" href='{{urlfor "SearchPackage.Get"}}'> {{.Back}}</a></h6>
+            <hr />
+            <form class="needs-validation" id="userForm" action='{{urlfor "PackageController.PostAction"}}' method="post" novalidate="" autocomplete="off">
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="input_package_name">Name</label>
+                        <input type="text" class="form-control" placeholder={{.packageNamePlaceholder}} name="input_user_first_name1" id="input_package_name" maxlength="30" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)" required>
+                        <!-- <span class="error-message" style="color: rgb(245, 51, 51);">{{ .nameErrorMsg }}</span> -->
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_middele_name">Volume</label>
+                        <input type="text" class="form-control" placeholder={{.volumePlaceholder}} name="input_user_middele_name" id="input_Voume_amount" maxlength="30" oncopy="return false" onpaste="return false" oninput="this.value = this.value.replace(/[^0-9]/g, ''); blockSpecialChar(event)" onkeypress="return blockSpecialChar(event)" required>
+                        <!-- <span class="error-message" style="color: rgb(245, 51, 51);">{{ .volumeErrorMsg }}</span> -->
+                        <div class="valid-feedback"> </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="input_user_last_name">Transaction Fees</label>
+                        <input type="text" class="form-control" placeholder={{.taxPlaceholder}} name="input_user_last_name1" id="input_transaction_fees" maxlength="30" oncopy="return false" onpaste="return false" oninput="this.value = this.value.replace(/[^0-9]/g, ''); blockSpecialChar(event)" onkeypress="return blockSpecialChar(event)" required>
+                        <div class="valid-feedback"> </div>
+                    </div>
+                </div>
+                                              
+                <hr />
+                <div class="form-row">
+                    <div class="col-md-12 text-center">
+                        <button name="btnsubmit" id="submitBtn" type="submit" class="btn btn-primary">{{.Submit}}</button>
+                        <a href='{{urlfor "SearchPackage.Get"}}' type="button" class="btn btn-warning" id="cancel">{{.Cancel}}</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}}
+{{template "default/menuPrivilege.html" .}}
+{{end}}

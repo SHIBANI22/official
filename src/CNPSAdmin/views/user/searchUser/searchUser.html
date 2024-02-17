@@ -1,0 +1,138 @@
+{{template "themes/adminTemplate.html" .}}
+{{define "AdditionalStyles"}} 
+{{end}} 
+{{define "BreadCrumb"}}
+<div class="header-body-left">
+    <h3 class="page-title">{{.SeacrhUsers}}</h3>
+    <!-- begin::breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href='{{urlfor "Dashboard.Get"}}'>{{.Dashboard}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchUser.Get"}}'>{{.ProfileManagement}}</a></li>
+            <li class="breadcrumb-item"><a href='{{urlfor "SearchUser.Get"}}'>{{.SeacrhUsers}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{.List}}</li>
+        </ol>
+    </nav>
+    <!-- end::breadcrumb -->
+</div>
+{{end}}
+{{define "LayoutContent"}}
+<!-- begin::main content -->
+<main class="main-content">
+    {{if and (ne .DisplayMessage "") (ne .DisplayMessage " ")}}
+    <div class="alert alert-success alert-with-border alert-dismissible" role="alert">
+        <i class="ti-check m-r-10"></i> {{.DisplayMessage}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="ti-close"></i>
+        </button>
+    </div>
+    {{end}}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="">
+                    <div class="accordion custom-accordion">
+                        <div class="accordion-row open">
+                            <a href="#" class="accordion-header">
+                                <h6 class="card-title">{{.SearchFilters}}</h6>
+                                <i class="accordion-status-icon close fa fa-plus"></i>
+                                <i class="accordion-status-icon open fa fa-minus"></i>
+                            </a>
+                            <div class="accordion-body">
+                                <form class="" id="search_form" action='' method="post" novalidate="" autocomplete="off">
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_user_firstname">{{.UserName}}</label>
+                                            <input maxlength="50" type="text" class="form-control" id="EnterUserFirstName" placeholder='{{.UserName}}' name="input_user_firstname" id="input_user_firstname" oncopy="return false" onpaste="return false" onkeypress="return blockSpecialCharwithNumber(event)"
+                                            />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_user_email">{{.UserEmail}}</label>
+                                            <input maxlength="50" type="text" class="form-control" placeholder='{{.UserEmail}}' name="input_user_email" id="input_user_email" oncopy="return false" onpaste="return false" onkeypress="return blockDisabledChar(event)" />
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_user_mobile">{{.Mobile}}</label>
+                                            <input maxlength="10" type="text" class="form-control" id="mobile" placeholder='{{.Mobile}}' name="input_user_mobile" id="input_user_mobile" oncopy="return false" onpaste="return false" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 0'
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_user_role">{{.UserRole}}</label>
+                                            <select class="form-control select2" style="width: 100%;" id="input_user_role" name="input_user_role">
+                                                <option value="" id="input_user_role">{{.please_select}}</option>
+                                                {{range $role := .DepartArray}}
+                                                <option value="{{index $role 0}}">{{index $role 1}}</option>
+                                                {{end}}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="daterange">{{.SelectDateRange}}</label>
+                                            <div class="input-group">
+                                                <input type="text" name="daterange" id="daterange" placeholder="{{.SelectDateRange}}" class="form-control date-range-picker" readonly>
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="inputGroupPrepend3"> <i class="fa fa-calendar"></i></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="input_user_status">{{.UserStatus}}</label>
+                                            <select class="form-control select2" style="width: 100%;" id="input_user_status" name="input_user_status">
+                                                <option value="">{{.please_select}}</option>
+                                                <option value="ACTIVE">{{.Active}}</option>
+                                                <option value="INACTIVE">{{.InActive}}</option>
+                                                <option value="SUSPEND">{{.Suspend}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="form-row">
+                                        <div class="col-md-12 text-center">
+                                            <button name="btnsubmit" type="button" id="Search" class="btn btn-primary">{{.GetRecords}}</button>
+                                            <button name="btnreset" type="button" id="Reset" class="btn btn-warning">{{.Reset}}</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">{{.List}}
+                        <a id="CreateUserMenu" class="btn btn-danger pull-right" href="/User/CreateUser"> {{.Addnew}}</a>
+                    </h6>
+                    <hr />
+                    <div class="box-body table-responsive">
+                        <table id="listTable" class="listTable table table-bordered table-striped" data-document-title="{{.ListOfUsers}}" data-url='{{urlfor "SearchUser.Post"}}' data-orderby="desc" orderby-column="6" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th id="ID">{{.ID}}</th>
+                                    <th id="FirstName">{{.FirstName}}</th>
+                                    <th id="Mobile">{{.Mobile}}</th>
+                                    <th id="Email">{{.Email}}</th>
+                                    <th id="Role">{{.Role}}</th>
+                                    <th id="Language">{{.Language}}</th>
+                                    <th id="CreateDate">{{.CreateDate}}</th>
+                                    <th id="Status">{{.Status}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- end::main content -->
+{{end}}
+{{define "AdditionalScripts"}} 
+{{template "default/menuPrivilege.html" .}} 
+{{end}}

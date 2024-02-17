@@ -1,0 +1,213 @@
+<script type="text/javascript">
+var jsonMenu = {{.MenuJson }}
+// console.log(JSON.parse(jsonMenu));
+
+var inputjson = JSON.parse(jsonMenu);
+var fasttxn_tab = 0;
+$.each(inputjson, function(i, obj) {
+    // console.log(obj.identity);
+    if (obj.identity == 'Dashboard') {
+
+        if (obj.status == 'false') {
+
+            $("#DashboardMenu").css("display", "none");
+            $("#navigationDashboardsIcon").css("display", "none");
+
+        }
+    }
+
+    if (obj.identity == 'ProfileManagment') {
+
+        if (obj.status == 'false') {
+            $("#ProfileManagmentMenu").css("display", "none");
+            $("#ProfileManagmentMenuIcon").css("display", "none");
+
+        }
+    }
+
+    if (obj.identity == 'ViewUser') {
+
+        if (obj.status == 'false') {
+            $("#ViewUserMenu").css("display", "none");
+            $("#FastTxnViewUserMenu").css("display", "none");
+            fasttxn_tab++;
+        }
+    }
+
+    if (obj.identity == 'CreateUser') {
+
+        if (obj.status == 'false') {
+
+            $("#CreateUserMenu").css("display", "none");
+
+
+        }
+    }
+
+    if (obj.identity == 'UpdateUser') {
+
+        if (obj.status == 'false') {
+            $("#UpdateUserMenu").css("display", "none");
+        }
+    }
+
+    if (obj.identity == 'SystemConfiguration') {
+
+        if (obj.status == 'false') {
+            $("#SystemConfigMenu").css("display", "none");
+            $("#SystemConfigMenuIcon").css("display", "none");
+        }
+    }
+
+    if (obj.identity == 'ViewSwitchStatus') {
+
+        if (obj.status == 'false') {
+            $("#ViewSwitchStatusMenu").css("display", "none");
+            $("#FastTxnViewSwitchStatusMenu").css("display", "none");
+            fasttxn_tab++;
+        }
+    }
+
+    if (obj.identity == 'UpdateSwitchStatus') {
+
+        if (obj.status == 'false') {
+            $("#UpdateSwitchStatus").css("display", "none");
+        }
+    }
+
+    if (obj.identity == 'Viewrole') {
+
+        if (obj.status == 'false') {
+            $("#ViewRoleMenu").css("display", "none");
+        }
+    }
+
+    if (obj.identity == 'Createrole') {
+
+        if (obj.status == 'false') {
+            $("#createRoleMenu").css("display", "none");
+        }
+    }
+
+    if (obj.identity == 'Updaterole') {
+
+        if (obj.status == 'false') {
+            $("#updateRoleMenu").css("display", "none");
+
+        }
+    }
+
+    if (obj.identity == 'Viewprivileges') {
+
+        if (obj.status == 'false') {
+            $("#ViewPrivilegesMenu").css("display", "none");
+            $("#FastTxnViewPrivilegesMenu").css("display", "none");
+            fasttxn_tab++;
+        }
+    }
+    if (obj.identity == 'Updateprivileges') {
+
+        if (obj.status == 'false') {
+            $("#updatePrivilegeMenu").css("display", "none");
+
+        }
+    }
+
+    if (obj.identity == 'ViewChannels') {
+
+        if (obj.status == 'false') {
+            $("#ViewChannelMenu").css("display", "none");
+        }
+    }
+
+    if (obj.identity == 'UpdateChannels') {
+
+        if (obj.status == 'false') {
+            $("#UpdateChannelMenu").css("display", "none");
+
+        }
+    }
+
+    if (obj.identity == 'Reports') {
+
+        if (obj.status == 'false') {
+            $("#ReportsMenu").css("display", "none");
+            $("#ReportsMenuIcon").css("display", "none");
+        }
+    }
+
+    if (obj.identity == 'AuditReport') {
+
+        if (obj.status == 'false') {
+            $("#ViewAuditReportMenu").css("display", "none");
+        }
+    }
+
+    if (obj.identity == 'ChannelReport') {
+
+        if (obj.status == 'false') {
+            $("#ViewChannelReportMenu").css("display", "none");
+        }
+    }
+
+    if (obj.identity == 'DebugLogReport') {
+
+        if (obj.status == 'false') {
+            $("#ViewDebugLogReportMenu").css("display", "none");
+        }
+    }
+
+
+    if (obj.identity == 'Reporting') {
+
+        if (obj.status == 'false') {
+            $("#ReportingMenu").css("display", "none");
+            $("#ReportingMenuIcon").css("display", "none");
+        }
+    }
+
+     if (obj.identity == 'TransactionReport') {
+
+        if (obj.status == 'false') {
+            $("#ViewTransactionReportMenu").css("display", "none");
+            $("#FastTxnViewTransactionReportMenu").css("display", "none");
+            fasttxn_tab++;
+        }
+    }
+    if (obj.identity == 'ManualTransactionLabel') {
+
+        if (obj.status == 'false') {
+            $("#TxnManualProcessMenu").css("display", "none");
+            $("#TxnManualProcessMenuIcon").css("display", "none");
+        }
+    }
+    if (obj.identity == 'TransactionProcessing') {
+
+        if (obj.status == 'false') {
+            $("#TransactionprocessingMenu").css("display", "none");
+        }
+    }
+    
+     if (obj.identity == 'AnalyticsMenu') {
+
+        if (obj.status == 'false') {
+            $("#AnalyticsMenu").css("display", "none");
+            $("#AnalyticsMenuIcon").css("display", "none");
+        }
+    }
+     if (obj.identity == 'Analytics') {
+
+        if (obj.status == 'false') {
+            $("#ViewAnalyticsMenu").css("display", "none");
+            fasttxn_tab++;
+        }
+    }
+    if(fasttxn_tab == 4 || fasttxn_tab == "4"){
+      $("#fastTxnTab").css("display", "none");
+    }
+
+
+    
+
+});
+</script>

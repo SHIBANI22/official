@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CNPSAdmin Admin | Packages</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/assets/media/image/favicon.png" />
+    <!-- Plugin styles -->
+    <link rel="stylesheet" href="/static/vendors/bundle.css" type="text/css">
+    <!-- App styles -->
+    <link rel="stylesheet" href="/static/assets/css/app.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/vendors/select2/css/select2.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/css/custom.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/css/duDialog.css">
+</head>
+
+<body class="form-membership">
+    <div class="form-wrapper">
+        <h5 class="default-page-title">Package Create</h5>
+        <form id="packageForm" action="{{urlfor "PackageController.PostAction"}}" method="post" autocomplete="off"
+            onsubmit="return validateForm()">
+            <div class="form-row">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" placeholder="Enter Package Name" name="name" id="name"
+                    maxlength="255">
+                <span id="nameError" style="color: red;"></span>
+            </div>
+            <div class="form-row">
+                <label for="volume">Volume</label>
+                <input type="text" class="form-control" placeholder="Enter Volume" name="volume" id="volume"
+                    maxlength="16">
+                <span id="volumeError" style="color: red;"></span>
+            </div>
+            <div class="form-row">
+                <label for="txnfees">Transaction Fees</label>
+                <input type="text" class="form-control" placeholder="Enter Transaction Fees" name="txnfees"
+                    id="txnfees" maxlength="255">
+                <span id="txnfeesError" style="color: red;"></span>
+            </div>
+            <button class="btn btn-primary btn-block" id="createPackageButton">Create Package</button>
+        </form>
+        <div id="successMessage" style="color: green;"></div>
+    </div>
+    <script src="/static/vendors/bundle.js"></script>
+    <script src="/static/assets/js/app.min.js"></script>
+    <script src="/static/assets/js/jquery.validate.min.js"></script>
+    <script src="/static/assets/js/validation.js"></script>
+    <script src="/static/vendors/PACE/pace.min.js"></script>
+    <script src="/static/assets/js/duDialog.js"></script>
+    <script src="/static/vendors/select2/js/select2.min.js"></script>
+    <script src="/static/assets/js/custom.js"></script>
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var volume = document.getElementById("volume").value;
+            var txnfees = document.getElementById("txnfees").value;
+            var isValid = true;
+
+            // Clear previous error messages
+            document.getElementById("nameError").innerText = "";
+            document.getElementById("volumeError").innerText = "";
+            document.getElementById("txnfeesError").innerText = "";
+
+            if (name === "") {
+                document.getElementById("nameError").innerText = "Name is required";
+                isValid = false;
+            }
+
+            if (volume === "") {
+                document.getElementById("volumeError").innerText = "Volume is required";
+                isValid = false;
+            }
+
+            if (txnfees === "") {
+                document.getElementById("txnfeesError").innerText = "Transaction Fees is required";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        $(document).ready(function () {
+        var msg = "{{.DisplayMessage}}";
+        var okTextLabel = {{.OKLABEL}};
+        var successMessage = document.getElementById("successMessage");
+
+        if (msg != null && msg.trim() !== "") {
+            successMessage.innerText = msg;
+
+            // Automatically hide the success message after 3 seconds
+            setTimeout(function () {
+                successMessage.innerText = "";
+            }, 3000);
+        }
+    });
+    </script>
+</body>
+
+</html>

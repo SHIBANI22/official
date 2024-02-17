@@ -1,0 +1,9 @@
+{ 
+    "go.toolsEnvVars":{
+        "GO111MODULE": "off"
+    },
+    "go.gopath": "/home/ubuntu/work/PGS/cnpscommon/Common/:/home/ubuntu/multi_merchant_pgs_admin/SuperPgsAdmin/",
+    "go.delveConfig":{
+        "debugAdapter":"legacy"
+    }
+}
