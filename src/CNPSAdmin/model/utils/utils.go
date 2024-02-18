@@ -15,15 +15,15 @@ import (
 	"regexp"
 
 	"github.com/astaxie/beego"
-	"github.com/SHIBANI22/official/CNPSAdmin/model/db"
-	"github.com/SHIBANI22/official/CNPSAdmin/encoding/base64"
-	"github.com/SHIBANI22/official/CNPSAdmin/util/log"
-	"github.com/SHIBANI22/official/CNPSAdmin/util/password"
-	"github.com/SHIBANI22/official/CNPSAdmin/util/pbkdf2"
+	"CNPSAdmin/model/db"
+	"CNPSAdmin/encoding/base64"
+	"CNPSAdmin/util/log"
+	"CNPSAdmin/util/password"
+	"CNPSAdmin/util/pbkdf2"
 
 	"net/url"
 
-	"github.com/SHIBANI22/official/CNPSAdmin/model/db"
+	"CNPSAdmin/model/db"
 
 	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/session"
