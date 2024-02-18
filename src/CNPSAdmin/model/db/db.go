@@ -7,7 +7,7 @@ import (
 
 	"github.com/astaxie/beego"
 	_ "github.com/go-sql-driver/mysql"
-	"ominaya.com/database/sql"
+	"github.com/SHIBANI22/official/CNPSAdmin/database/sql"
 )
 
 var Db sql.Database
