@@ -1,9 +1,9 @@
 package adminChangePassword
 
 import (
-	"github.com/SHIBANI22/official/CNPSAdmin/model/db"
-	"github.com/SHIBANI22/official/CNPSAdmin/model/utils"
-	"github.com/SHIBANI22/official/CNPSAdmin/session"
+	"CNPSAdmin/model/db"
+	"CNPSAdmin/model/utils"
+	"CNPSAdmin/session"
 	"crypto/rand"
 	"unicode"
 
