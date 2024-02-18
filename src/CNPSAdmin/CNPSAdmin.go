@@ -1,8 +1,8 @@
 package main
 
 import (
-	"CNPSAdmin/model/utils"
-	_ "CNPSAdmin/routers"
+	"github.com/SHIBANI22/official/CNPSAdmin/model/utils"
+	_ "github.com/SHIBANI22/official/CNPSAdmin/routers"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
