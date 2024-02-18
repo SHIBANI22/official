@@ -15,11 +15,11 @@ import (
 	"regexp"
 
 	"github.com/astaxie/beego"
-	"ominaya.com/database/sql"
-	"ominaya.com/encoding/base64"
-	"ominaya.com/util/log"
-	p "ominaya.com/util/password"
-	"ominaya.com/util/pbkdf2"
+	"github.com/SHIBANI22/official/CNPSAdmin/model/db"
+	"github.com/SHIBANI22/official/CNPSAdmin/encoding/base64"
+	"github.com/SHIBANI22/official/CNPSAdmin/util/log"
+	"github.com/SHIBANI22/official/CNPSAdmin/util/password"
+	"github.com/SHIBANI22/official/CNPSAdmin//util/pbkdf2"
 
 	"net/url"
 
