@@ -23,7 +23,7 @@ import (
 
 	"net/url"
 
-	"CNPSAdmin/model/db"
+	"github.com/SHIBANI22/official/CNPSAdmin/model/db"
 
 	"github.com/astaxie/beego/context"
 	"github.com/astaxie/beego/session"
