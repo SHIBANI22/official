@@ -1,13 +1,12 @@
 # Stage 1: Build the application
 FROM golang:latest AS build
 
-WORKDIR /go/src/app
+WORKDIR /app
 
 COPY . .
 
 # Build the Go application
-RUN go get -d -v ./...
-RUN go install -v ./...
+RUN CGO_ENABLED=0 GOOS=linux go build -o app .
 
 # Stage 2: Create a minimal image
 FROM alpine:latest
@@ -18,7 +17,7 @@ WORKDIR /app
 EXPOSE 8000
 
 # Copy the built executable from the first stage
-COPY --from=build /go/bin/app .
+COPY --from=build /app/app .
 
 # Command to run the executable
 CMD ["./app"]
