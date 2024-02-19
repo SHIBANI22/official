@@ -9,7 +9,8 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # Copy the built executable from the Jenkins workspace into the container
-COPY app .
+COPY app /app
+
 
 # Use a lightweight base image for the final stage
 FROM alpine:latest
