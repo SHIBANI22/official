@@ -8,8 +8,8 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copy the built executable from the Jenkins workspace into the container
-COPY /var/lib/jenkins/workspace/official /src
+# Copy the source code from the host into the container
+COPY . .
 
 # Use a lightweight base image for the final stage
 FROM alpine:latest
