@@ -9,7 +9,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 # Copy the source code into the container
-COPY . .
+COPY /var/lib/jenkins/workspace/official .
 
 # Build the Go application
 RUN go build -o app
