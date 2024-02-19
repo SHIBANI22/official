@@ -1,21 +1,19 @@
-# Use the official Golang image as a base image
+# Stage 1: Build the application
 FROM golang:latest AS build
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Go mod and sum files and download dependencies
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copy the built executable from the Jenkins workspace into the container
-COPY app /app
+COPY . .
 
+# Build the Go application
+RUN go build -o app
 
-# Use a lightweight base image for the final stage
+# Stage 2: Create a minimal image
 FROM alpine:latest
 
-# Set the working directory inside the container
 WORKDIR /app
 
 # Expose port 8000
