@@ -8,8 +8,11 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod download
 
-# Copy the source code from the host into the container
+# Copy the source code into the container
 COPY . .
+
+# Build the Go application
+RUN go build -o app
 
 # Use a lightweight base image for the final stage
 FROM alpine:latest
@@ -20,7 +23,7 @@ WORKDIR /app
 # Expose port 8000
 EXPOSE 8000
 
-# Copy the built executable from the previous stage
+# Copy the built executable from the build stage
 COPY --from=build /app/app .
 
 # Command to run the executable
