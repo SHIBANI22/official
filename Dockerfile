@@ -16,7 +16,7 @@ WORKDIR /app
 # Expose port 8000
 EXPOSE 8000
 
-# Copy the built executable from the first stage
+# Copy the contents of the app directory from the first stage
 COPY --from=build /app/app .
 
 # Command to run the executable
